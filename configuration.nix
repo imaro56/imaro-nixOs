@@ -11,6 +11,7 @@
   # Boot
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
+  boot.kernelParams = [ "nvidia.NVreg_PreserveVideoMemoryAllocations=1" ];
 
   # Networking
   networking.hostName = "nixos";
@@ -31,14 +32,19 @@
     LC_TIME = "uk_UA.UTF-8";
   };
 
+  # Firmware
+  hardware.enableRedistributableFirmware = true;
+
   # Graphics (NVIDIA)
   services.xserver.videoDrivers = [ "nvidia" ];
   hardware.graphics.enable = true;
+  hardware.graphics.enable32Bit = true;
   hardware.nvidia = {
     modesetting.enable = true;
     open = false;
     nvidiaSettings = true;
     package = config.boot.kernelPackages.nvidiaPackages.stable;
+    powerManagement.enable = true;
   };
 
   # Desktop
@@ -72,6 +78,9 @@
     shell = pkgs.fish;
   };
   security.sudo.wheelNeedsPassword = false;
+
+  # Wayland
+  environment.sessionVariables.NIXOS_OZONE_WL = "1";
 
   # System Packages
   nixpkgs.config.allowUnfree = true;
