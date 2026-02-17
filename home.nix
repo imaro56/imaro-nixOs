@@ -46,6 +46,13 @@
       enable = true;
       settings.user.name = "imaro56";
       settings.user.email = "dimamarich07@gmail.com";
+      includes = [{
+        condition = "gitdir:~/work/";
+        contents.user = {
+          name = "Dima Marych";
+          email = "imaro56@newtonideas.com";
+        };
+      }];
     };
 
     direnv = {
@@ -75,6 +82,12 @@
   ] ++ [
     # External flake packages
     inputs.zen-browser.packages."${pkgs.stdenv.hostPlatform.system}".default
+  ];
+
+  # GNOME Wayland keyboard settings
+  dconf.settings."org/gnome/desktop/input-sources".xkb-options = [
+    "grp:win_space_toggle"
+    "caps:swapescape"
   ];
 
   # Don't change this
