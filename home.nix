@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, pkgs, inputs, ... }:
 
 {
   home.username = "imaro56";
@@ -13,9 +13,10 @@
 
   # Packages managed by Home Manager
   home.packages = with pkgs; [
-    # Add user apps here later, e.g.:
-    # firefox
-    # discord
+    
+  ] ++ [
+    # for external flake packages
+    inputs.zen-browser.packages."${pkgs.system}".default
   ];
 
   # Don't change this
