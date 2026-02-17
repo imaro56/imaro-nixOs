@@ -4,16 +4,68 @@
   home.username = "imaro56";
   home.homeDirectory = "/home/imaro56";
 
-  # Git configuration
-  programs.git = {
-    enable = true;
-    userName = "imaro56";
-    userEmail = "dimamarich07@gmail.com";
+  programs = {
+    # Shell
+    fish = {
+      enable = true;
+      shellAliases = {
+        rebuild = "cd ~/nixos-config && git add . && sudo nixos-rebuild switch --flake .";
+        conf = "cd ~/nixos-config && vim .";
+      };
+    };
+
+    starship = {
+      enable = true;
+      enableFishIntegration = true;
+    };
+
+    # Editors
+    vscode = {
+      enable = true;
+    };
+
+    neovim = {
+      enable = true;
+      defaultEditor = true;
+      vimAlias = true;
+      extraConfig = ''
+        set clipboard=unnamedplus
+        set number
+        set relativenumber
+      '';
+    };
+
+    # Tools
+    # Tools
+    fzf = {
+      enable = true;
+      enableFishIntegration = true;
+    };
+
+    git = {
+      enable = true;
+      userName = "imaro56";
+      userEmail = "dimamarich07@gmail.com";
+    };
+
+    home-manager.enable = true;
   };
+  
 
   # Packages managed by Home Manager
   home.packages = with pkgs; [
+    # Messagers
+    telegram-desktop
+    discord
+    slack
     
+    # Terminal tools
+    tmux # terminal manager
+    fzf
+    ripgrep
+    btop
+    unzip
+    lf
   ] ++ [
     # for external flake packages
     inputs.zen-browser.packages."${pkgs.system}".default
@@ -21,7 +73,4 @@
 
   # Don't change this
   home.stateVersion = "24.11";
-
-  # Let Home Manager manage itself
-  programs.home-manager.enable = true;
 }

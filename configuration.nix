@@ -85,7 +85,7 @@
   users.users.imaro56 = {
     isNormalUser = true;
     description = "imaro56";
-    extraGroups = [ "networkmanager" "wheel" ];
+    extraGroups = [ "networkmanager" "wheel" "docker" ];
     packages = with pkgs; [
     #  thunderbird
     ];
@@ -109,13 +109,22 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-   vim		#vim
-   lf		#terminal file manager
-   ghostty	#main terminal
-   git		#git
-   sl   	#remove later
-   wget         #for files downloading(research more on it later)
+    ghostty
   ];
+  
+  # Fish as login shell
+  programs.fish.enable = true;
+  users.users.imaro56.shell = pkgs.fish;
+
+
+  # Steam
+  programs.steam = {
+    enable = true;
+    remotePlay.openFirewall = true;
+  };
+
+  # Docker
+  virtualisation.docker.enable = true;
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
