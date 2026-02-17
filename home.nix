@@ -48,6 +48,11 @@
       settings.user.email = "dimamarich07@gmail.com";
     };
 
+    direnv = {
+      enable = true;
+      nix-direnv.enable = true;
+    };
+
     home-manager.enable = true;
   };
 
