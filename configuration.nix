@@ -8,7 +8,6 @@
   imports =
     [
       ./hardware-configuration.nix
-      inputs.home-manager.nixosModules.default
     ];
 
   #Flakes
@@ -92,13 +91,6 @@
   };
 
   security.sudo.wheelNeedsPassword = false; #disable password for sudo
-
-  home-manager = {
-    extraSpecialArgs = { inherit inputs; };
-    users = {
-      "imaro56" = import ./home.nix;
-    };
-  };
 
   # Install firefox.
   programs.firefox.enable = true;

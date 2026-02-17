@@ -22,6 +22,7 @@
     # Editors
     vscode = {
       enable = true;
+      package = pkgs.vscode.fhs;
     };
 
     neovim = {
