@@ -31,6 +31,16 @@
     LC_TIME = "uk_UA.UTF-8";
   };
 
+  # Graphics (NVIDIA)
+  services.xserver.videoDrivers = [ "nvidia" ];
+  hardware.graphics.enable = true;
+  hardware.nvidia = {
+    modesetting.enable = true;
+    open = false;
+    nvidiaSettings = true;
+    package = config.boot.kernelPackages.nvidiaPackages.stable;
+  };
+
   # Desktop
   services.xserver.enable = true;
   services.displayManager.gdm.enable = true;
