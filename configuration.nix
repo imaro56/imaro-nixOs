@@ -1,4 +1,4 @@
-{ config, pkgs, inputs, ... }:
+{ config, pkgs, lib, inputs, ... }:
 
 {
   imports = [
@@ -37,7 +37,11 @@
   services.desktopManager.gnome.enable = true;
   services.xserver.xkb = {
     layout = "us,ua";
-    options = "grp:win_space_toggle";
+    options = lib.concatStringsSep "," [
+      "grp:win_space_toggle" # Super+Space to toggle language
+      "caps:swapescape" # Swap Esc and CapsLock
+    ];
+
   };
 
   # Audio
