@@ -66,6 +66,9 @@
     btop
     unzip
     lf
+
+    # Claude code
+    claude-code
   ] ++ [
     # for external flake packages
     inputs.zen-browser.packages."${pkgs.system}".default
