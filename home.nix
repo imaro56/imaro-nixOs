@@ -37,7 +37,6 @@
     };
 
     # Tools
-    # Tools
     fzf = {
       enable = true;
       enableFishIntegration = true;
@@ -45,13 +44,12 @@
 
     git = {
       enable = true;
-      userName = "imaro56";
-      userEmail = "dimamarich07@gmail.com";
+      settings.user.name = "imaro56";
+      settings.user.email = "dimamarich07@gmail.com";
     };
 
     home-manager.enable = true;
   };
-  
 
   # Packages managed by Home Manager
   home.packages = with pkgs; [
@@ -59,19 +57,18 @@
     telegram-desktop
     discord
     slack
-    
+
     # Terminal tools
     tmux # terminal manager
-    fzf
     ripgrep
     btop
     unzip
     lf
 
-    # Claude code
+    # Claude Code
     claude-code
   ] ++ [
-    # for external flake packages
+    # External flake packages
     inputs.zen-browser.packages."${pkgs.system}".default
   ];
 
