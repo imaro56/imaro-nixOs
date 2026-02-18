@@ -11,7 +11,7 @@
   # Boot
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
-  boot.kernelParams = [ "nvidia.NVreg_PreserveVideoMemoryAllocations=1" ];
+  boot.kernelParams = [ "nvidia.NVreg_PreserveVideoMemoryAllocations=1" "usbcore.autosuspend=-1" ];
 
   # SSD (Samsung 990 Pro NVMe)
   fileSystems."/".options = [ "noatime" ];
