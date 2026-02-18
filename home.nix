@@ -60,6 +60,14 @@
       nix-direnv.enable = true;
     };
 
+    ghostty = {
+      enable = true;
+      settings = {
+        clipboard-paste-bracketed-safe = true;
+        clipboard-read = "allow";
+      };
+    };
+
     home-manager.enable = true;
   };
 
@@ -77,8 +85,14 @@
     unzip
     lf
 
+    # Office
+    libreoffice
+
     # Claude Code
     claude-code
+    nodejs # npx for context7 MCP
+    uv # uvx for mcp-nixos
+    playwright-mcp # Playwright MCP server
   ] ++ [
     # External flake packages
     inputs.zen-browser.packages."${pkgs.stdenv.hostPlatform.system}".default
