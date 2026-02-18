@@ -13,6 +13,14 @@
   boot.loader.efi.canTouchEfiVariables = true;
   boot.kernelParams = [ "nvidia.NVreg_PreserveVideoMemoryAllocations=1" ];
 
+  # SSD (Samsung 990 Pro NVMe)
+  fileSystems."/".options = [ "noatime" ];
+  services.fstrim.enable = true;
+  boot.kernel.sysctl = {
+    "vm.swappiness" = 10;
+    "vm.dirty_writeback_centisecs" = 1500;
+  };
+
   # Networking
   networking.hostName = "nixos";
   networking.networkmanager.enable = true;
@@ -34,6 +42,7 @@
 
   # Firmware
   hardware.enableRedistributableFirmware = true;
+  services.fwupd.enable = true;
 
   # Graphics (NVIDIA)
   services.xserver.videoDrivers = [ "nvidia" ];
