@@ -78,6 +78,9 @@
     discord
     slack
 
+    # Browser
+    brave
+
     # Terminal tools
     tmux # terminal manager
     ripgrep
