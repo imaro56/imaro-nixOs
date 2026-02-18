@@ -85,6 +85,11 @@
     unzip
     lf
 
+    # Disk usage
+    ncdu # interactive TUI disk usage analyzer
+    duf # modern df replacement
+    dust # intuitive du replacement
+
     # Office
     libreoffice
 
