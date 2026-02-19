@@ -25,7 +25,7 @@
           home-manager.useGlobalPkgs = true;
           home-manager.useUserPackages = true;
           home-manager.extraSpecialArgs = { inherit inputs; };
-          home-manager.users.imaro56 = import ./home.nix;
+          home-manager.users.imaro56 = import ./home;
         }
       ];
     };
