@@ -8,12 +8,12 @@
     slack
 
     # Terminal tools
-    tmux
     ripgrep
     btop
     unzip
     lf
     fastfetch
+    bat
 
     # Disk usage
     ncdu
