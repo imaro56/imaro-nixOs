@@ -1,5 +1,26 @@
 { pkgs, ... }:
 
+let
+  # Nerd Font icons via JSON unicode escapes (nix strips literal glyphs)
+  icon = char: builtins.fromJSON ''"${char}"'';
+  nf = {
+    git_branch = icon ''\ue0a0'';
+    python = icon ''\ue606'';
+    rust = icon ''\udb85\ude17''; # U+F1617
+    nodejs = icon ''\ue718'';
+    golang = icon ''\ue627'';
+    docker = icon ''\uf308'';
+    nix = icon ''\uf313'';
+    lock = icon ''\udb80\udf3e''; # U+F033E
+    vim = icon ''\udb81\udd57''; # U+F0557
+    nixos = icon ''\uf313'';
+    arch = icon ''\uf303'';
+    debian = icon ''\uf306'';
+    fedora = icon ''\uf30a'';
+    ubuntu = icon ''\uf31b'';
+    windows = icon ''\udb80\udf72''; # U+F0372
+  };
+in
 {
   programs = {
     fish = {
@@ -74,7 +95,7 @@
         character = {
           success_symbol = "[✿](bold teal)";
           error_symbol = "[✿](red)";
-          vimcmd_symbol = "[󰕷 ](bold rosewater)";
+          vimcmd_symbol = "[${nf.vim} ](bold rosewater)";
         };
 
         fill.symbol = " ";
@@ -88,26 +109,26 @@
         directory = {
           truncation_symbol = "…/";
           truncation_length = 4;
-          read_only = " 󰌾";
+          read_only = " ${nf.lock}";
         };
 
-        git_branch.symbol = " ";
-        python.symbol = " ";
-        rust.symbol = "󱘗 ";
-        nodejs.symbol = " ";
-        golang.symbol = " ";
-        docker_context.symbol = " ";
-        nix_shell.symbol = " ";
+        git_branch.symbol = "${nf.git_branch} ";
+        python.symbol = "${nf.python} ";
+        rust.symbol = "${nf.rust} ";
+        nodejs.symbol = "${nf.nodejs} ";
+        golang.symbol = "${nf.golang} ";
+        docker_context.symbol = "${nf.docker} ";
+        nix_shell.symbol = "${nf.nix} ";
 
         os = {
           disabled = false;
           symbols = {
-            NixOS = " ";
-            Arch = " ";
-            Debian = " ";
-            Fedora = " ";
-            Ubuntu = " ";
-            Windows = "󰍲 ";
+            NixOS = "${nf.nixos} ";
+            Arch = "${nf.arch} ";
+            Debian = "${nf.debian} ";
+            Fedora = "${nf.fedora} ";
+            Ubuntu = "${nf.ubuntu} ";
+            Windows = "${nf.windows} ";
           };
         };
 

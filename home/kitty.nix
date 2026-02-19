@@ -6,9 +6,10 @@
     themeFile = "Catppuccin-Mocha";
 
     font = {
-      name = "JetBrainsMono Nerd Font";
+      name = "JetBrainsMono Nerd Font Mono";
       size = 12;
     };
+
 
     settings = {
       # Scrollback
@@ -16,7 +17,7 @@
 
       # Clipboard
       copy_on_select = "clipboard";
-      clipboard_control = "write-clipboard write-primary read-clipboard-ask read-primary-ask";
+      clipboard_control = "write-clipboard write-primary read-clipboard read-primary-ask";
 
       # Window
       hide_window_decorations = true;
@@ -33,7 +34,7 @@
       tab_bar_edge = "top";
       tab_bar_align = "center";
       tab_bar_style = "separator";
-      tab_separator = "\" . \"";
+      tab_separator = "\" | \"";
       tab_bar_min_tabs = 1;
       tab_title_max_length = 30;
       active_tab_foreground = "#CBA6F7";
@@ -82,7 +83,6 @@
 
       # Splits
       "kitty_mod+\\" = "launch --cwd=current --location=vsplit";
-      "kitty_mod+minus" = "launch --cwd=current --location=hsplit";
 
       # New tab with current directory
       "kitty_mod+t" = "new_tab_with_cwd";

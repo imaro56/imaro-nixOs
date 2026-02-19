@@ -59,6 +59,7 @@
       custom-keybindings = [
         "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/"
         "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1/"
+        "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom2/"
       ];
     };
 
@@ -74,6 +75,13 @@
       name = "File Manager";
       command = "nautilus";
       binding = "<Super>e";
+    };
+
+    # Custom: browser
+    "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom2" = {
+      name = "Zen Browser";
+      command = "zen-beta";
+      binding = "<Super>b";
     };
   };
 }
