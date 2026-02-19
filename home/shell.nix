@@ -25,6 +25,21 @@
       nix-direnv.enable = true;
     };
 
+    kitty = {
+      enable = true;
+      font = {
+        name = "JetBrainsMono Nerd Font";
+        size = 12;
+      };
+      settings = {
+        scrollback_lines = 10000;
+        copy_on_select = "clipboard";
+        clipboard_control = "write-clipboard write-primary read-clipboard-ask read-primary-ask";
+        wayland_titlebar_decorations = "client";
+        enable_audio_bell = false;
+      };
+    };
+
     ghostty = {
       enable = true;
       settings = {

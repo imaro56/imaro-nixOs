@@ -19,6 +19,9 @@
     duf
     dust
 
+    # Fonts
+    nerd-fonts.jetbrains-mono
+
     # Office
     libreoffice
 
