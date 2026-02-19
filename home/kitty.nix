@@ -51,17 +51,35 @@
 
       # Shell integration
       shell_integration = "enabled";
+
+      # Layouts
+      enabled_layouts = "splits,stack";
     };
 
     keybindings = {
-      # Vim-style window movement
-      "kitty_mod+h" = "move_window left";
-      "kitty_mod+j" = "move_window down";
-      "kitty_mod+k" = "move_window up";
-      "kitty_mod+l" = "move_window right";
+      # Focus neighboring window
+      "kitty_mod+h" = "neighboring_window left";
+      "kitty_mod+j" = "neighboring_window down";
+      "kitty_mod+k" = "neighboring_window up";
+      "kitty_mod+l" = "neighboring_window right";
+      "ctrl+shift+left" = "neighboring_window left";
+      "ctrl+shift+down" = "neighboring_window down";
+      "ctrl+shift+up" = "neighboring_window up";
+      "ctrl+shift+right" = "neighboring_window right";
+
+      # Move window
+      "ctrl+shift+alt+h" = "move_window left";
+      "ctrl+shift+alt+j" = "move_window down";
+      "ctrl+shift+alt+k" = "move_window up";
+      "ctrl+shift+alt+l" = "move_window right";
+      "ctrl+shift+alt+left" = "move_window left";
+      "ctrl+shift+alt+down" = "move_window down";
+      "ctrl+shift+alt+up" = "move_window up";
+      "ctrl+shift+alt+right" = "move_window right";
 
       # Splits
       "kitty_mod+\\" = "launch --location=vsplit";
+      "kitty_mod+minus" = "launch --location=hsplit";
 
       # Tab switching
       "alt+1" = "goto_tab 1";
