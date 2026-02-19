@@ -13,7 +13,6 @@
     unzip
     lf
     fastfetch
-    bat
 
     # Disk usage
     ncdu
