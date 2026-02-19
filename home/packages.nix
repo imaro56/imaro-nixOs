@@ -13,6 +13,7 @@
     btop
     unzip
     lf
+    fastfetch
 
     # Disk usage
     ncdu
