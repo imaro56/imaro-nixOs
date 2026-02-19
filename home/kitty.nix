@@ -54,6 +54,9 @@
 
       # Layouts
       enabled_layouts = "splits,stack";
+
+      # Tabs
+      tab_spawn_location = "neighbor";
     };
 
     keybindings = {
@@ -78,8 +81,11 @@
       "ctrl+shift+alt+right" = "move_window right";
 
       # Splits
-      "kitty_mod+\\" = "launch --location=vsplit";
-      "kitty_mod+minus" = "launch --location=hsplit";
+      "kitty_mod+\\" = "launch --cwd=current --location=vsplit";
+      "kitty_mod+minus" = "launch --cwd=current --location=hsplit";
+
+      # New tab with current directory
+      "kitty_mod+t" = "new_tab_with_cwd";
 
       # Tab switching
       "alt+1" = "goto_tab 1";
