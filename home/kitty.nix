@@ -85,7 +85,7 @@
       "kitty_mod+\\" = "launch --cwd=current --location=vsplit";
 
       # New tab with current directory
-      "kitty_mod+t" = "new_tab_with_cwd";
+      "kitty_mod+t" = "launch --cwd=current --type=tab --location=neighbor";
 
       # Tab switching
       "alt+1" = "goto_tab 1";

@@ -23,13 +23,16 @@
     nerd-fonts.jetbrains-mono
 
     # Office
-    libreoffice
+    onlyoffice-desktopeditors
 
     # Claude Code
     claude-code
     nodejs
     uv
     playwright-mcp
+
+    #Notes
+    obsidian
   ] ++ [
     # External flake packages
     inputs.zen-browser.packages."${pkgs.stdenv.hostPlatform.system}".default

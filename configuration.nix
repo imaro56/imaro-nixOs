@@ -10,6 +10,7 @@
 
   # Boot
   boot.loader.systemd-boot.enable = true;
+  boot.loader.timeout = 10;
   boot.loader.efi.canTouchEfiVariables = true;
   boot.kernelParams = [ "nvidia.NVreg_PreserveVideoMemoryAllocations=1" "usbcore.autosuspend=-1" ];
 
