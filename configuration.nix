@@ -22,10 +22,34 @@
 
 
   # Boot
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.timeout = 10;
-  boot.loader.systemd-boot.configurationLimit = 3;
-  boot.loader.efi.canTouchEfiVariables = true;
+  boot.loader = {
+    efi.canTouchEfiVariables = true;
+    timeout = 10;
+
+    systemd-boot = {
+      enable = true;
+      configurationLimit = 3;
+
+      windows = {
+        "windows" =
+          let
+            # To determine the name of the windows boot drive, boot into edk2 first, then run
+            # `map -c` to get drive aliases, and try out running `FS1:`, then `ls EFI` to check
+            # which alias corresponds to which EFI partition.
+            boot-drive = "FS0";
+          in
+          {
+            title = "Windows";
+            efiDeviceHandle = boot-drive;
+            sortKey = "y_windows";
+          };
+      };
+
+      edk2-uefi-shell.enable = true;
+      edk2-uefi-shell.sortKey = "z_edk2";
+    };
+  };
+
   boot.kernelParams = [ "nvidia.NVreg_PreserveVideoMemoryAllocations=1" "usbcore.autosuspend=-1" ];
 
   # SSD (Samsung 990 Pro NVMe)
