@@ -50,7 +50,7 @@
     };
   };
 
-  boot.kernelParams = [ "nvidia.NVreg_PreserveVideoMemoryAllocations=1" "usbcore.autosuspend=-1" ];
+  boot.kernelParams = [ "nvidia.NVreg_PreserveVideoMemoryAllocations=1" ];
 
   # SSD (Samsung 990 Pro NVMe)
   fileSystems."/".options = [ "noatime" ];
@@ -83,7 +83,7 @@
   hardware.enableRedistributableFirmware = true;
   services.fwupd.enable = true;
 
-  # Graphics (NVIDIA)
+  # Graphics (NVIDIA PRIME Offload - AMD iGPU primary, NVIDIA dGPU on demand)
   services.xserver.videoDrivers = [ "nvidia" ];
   hardware.graphics.enable = true;
   hardware.graphics.enable32Bit = true;
@@ -93,6 +93,15 @@
     nvidiaSettings = true;
     package = config.boot.kernelPackages.nvidiaPackages.stable;
     powerManagement.enable = true;
+    powerManagement.finegrained = true;
+    prime = {
+      offload = {
+        enable = true;
+        enableOffloadCmd = true;
+      };
+      amdgpuBusId = "PCI:6:0:0";
+      nvidiaBusId = "PCI:1:0:0";
+    };
   };
 
   # Desktop
