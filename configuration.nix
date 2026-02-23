@@ -153,6 +153,7 @@
     remotePlay.openFirewall = true;
   };
   virtualisation.docker.enable = true;
+  virtualisation.docker.enableOnBoot = false;
   programs.nix-ld.enable = true;
 
   system.stateVersion = "25.11";
