@@ -31,7 +31,10 @@
     uv
     playwright-mcp
 
-    #Notes
+    # GNOME extensions
+    gnomeExtensions.blur-my-shell
+
+    # Notes
     obsidian
   ] ++ [
     # External flake packages

@@ -2,6 +2,12 @@
 
 {
   dconf.settings = {
+    # Enable GNOME extensions
+    "org/gnome/shell" = {
+      enabled-extensions = [
+        "blur-my-shell@aunetx"
+      ];
+    };
     # Keyboard layout
     "org/gnome/desktop/input-sources" = {
       xkb-options = [
