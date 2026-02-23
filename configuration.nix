@@ -147,7 +147,8 @@
   ];
 
   # Services
-  services.printing.enable = true;
+  services.printing.enable = false;
+  systemd.services.ModemManager.enable = false;
   programs.fish.enable = true;
   programs.steam = {
     enable = true;
