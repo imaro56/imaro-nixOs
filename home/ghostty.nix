@@ -25,7 +25,7 @@
       gtk-single-instance = "desktop";
 
       # -- Transparency --
-      background-opacity = 0.88;
+      background-opacity = 0.98;
       background-blur = 20;
       unfocused-split-opacity = 0.85;
 
@@ -56,8 +56,8 @@
       title-report = false;
 
       # -- Misc --
-      confirm-close-surface = true;
-      scrollback-limit = 10000000;
+      confirm-close-surface = false;
+      scrollback-limit = 10000;
       link-url = true;
       minimum-contrast = 1.0;
 
@@ -66,9 +66,8 @@
         "clear"
 
         # Clipboard
-        "performable:ctrl+c=copy:clipboard"
-        "ctrl+shift+c=copy:clipboard"
-        "ctrl+shift+v=paste:clipboard"
+        "ctrl+shift+c=copy_to_clipboard"
+        "ctrl+shift+v=paste_from_clipboard"
 
         # Splits - create
         "ctrl+shift+enter=new_split:right"
