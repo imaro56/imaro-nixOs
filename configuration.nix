@@ -142,7 +142,8 @@
   # System Packages
   nixpkgs.config.allowUnfree = true;
   environment.systemPackages = with pkgs; [
-    jq
+    jq # json processor
+    wl-clipboard # clipboard
   ];
 
   # Services
