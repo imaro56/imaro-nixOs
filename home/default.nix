@@ -4,6 +4,7 @@
   imports = [
     ./shell.nix
     ./kitty.nix
+    ./ghostty.nix
     ./editors.nix
     ./git.nix
     ./packages.nix

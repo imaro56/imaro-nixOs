@@ -66,7 +66,7 @@
     # Custom: launch terminal
     "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0" = {
       name = "Terminal";
-      command = "kitty";
+      command = "ghostty";
       binding = "<Super>Return";
     };
 

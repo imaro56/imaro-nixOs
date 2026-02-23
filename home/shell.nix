@@ -66,9 +66,9 @@ in
         set -g fish_pager_color_completion cdd6f4
         set -g fish_pager_color_description 6c7086
 
-        # Greeting with fastfetch in kitty
+        # Greeting with fastfetch in kitty/ghostty
         function fish_greeting
-          if string match -q "xterm-kitty" $TERM
+          if string match -q "xterm-kitty" $TERM; or string match -q "xterm-ghostty" $TERM
             fastfetch
           end
         end
@@ -76,7 +76,7 @@ in
         # Re-show greeting on clear
         function clear --wraps fish_clear
           command clear
-          if string match -q "xterm-kitty" $TERM
+          if string match -q "xterm-kitty" $TERM; or string match -q "xterm-ghostty" $TERM
             fish_greeting
           end
         end
@@ -185,14 +185,6 @@ in
     direnv = {
       enable = true;
       nix-direnv.enable = true;
-    };
-
-    ghostty = {
-      enable = true;
-      settings = {
-        clipboard-paste-bracketed-safe = true;
-        clipboard-read = "allow";
-      };
     };
   };
 }
