@@ -1,4 +1,4 @@
-{ inputs, ... }:
+{ inputs, pkgs, ... }:
 
 {
   imports = [
@@ -8,11 +8,20 @@
     ./editors.nix
     ./git.nix
     ./packages.nix
-    ./desktop.nix
+    ./gnome.nix
+    ./hyprland.nix
   ];
 
   home.username = "imaro56";
   home.homeDirectory = "/home/imaro56";
+
+  home.pointerCursor = {
+    name = "Adwaita";
+    package = pkgs.adwaita-icon-theme;
+    size = 24;
+    gtk.enable = true;
+    x11.enable = true;
+  };
 
   programs.home-manager.enable = true;
 

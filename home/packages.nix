@@ -34,6 +34,9 @@
     # GNOME extensions
     gnomeExtensions.blur-my-shell
 
+    # Rofi
+    rofi
+
     # Notes
     obsidian
   ] ++ [

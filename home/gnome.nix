@@ -16,6 +16,13 @@
       ];
     };
 
+    # Touchpad
+    "org/gnome/desktop/peripherals/touchpad" = {
+      tap-to-click = true;
+      two-finger-scrolling-enabled = true;
+      click-method = "fingers";
+    };
+
     # Disable Super+N app switching (frees Super+N for workspaces)
     "org/gnome/shell/keybindings" = {
       switch-to-application-1 = [];
