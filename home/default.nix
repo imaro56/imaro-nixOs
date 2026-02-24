@@ -23,6 +23,15 @@
     x11.enable = true;
   };
 
+  xdg.portal = {
+    enable = true;
+    config = {
+      common.default = [ "gtk" ];
+      gnome.default = [ "gnome" "gtk" ];
+      hyprland.default = [ "hyprland" "gtk" ];
+    };
+  };
+
   programs.home-manager.enable = true;
 
   # Don't change this
