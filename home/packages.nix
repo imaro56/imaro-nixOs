@@ -34,6 +34,14 @@
     # GNOME extensions
     gnomeExtensions.blur-my-shell
 
+    # Hyprland
+    waybar
+    mako
+    hyprpaper
+    hyprlock
+    grim
+    slurp
+
     # Rofi
     rofi
 

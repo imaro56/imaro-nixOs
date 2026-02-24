@@ -1,4 +1,4 @@
-{ inputs, pkgs, ... }:
+{ inputs, pkgs, lib, ... }:
 
 {
   imports = [
@@ -24,7 +24,8 @@
   };
 
   xdg.portal = {
-    enable = true;
+    enable = lib.mkForce true;
+    extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
     config = {
       common.default = [ "gtk" ];
       gnome.default = [ "gnome" "gtk" ];
