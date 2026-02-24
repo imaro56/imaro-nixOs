@@ -29,10 +29,6 @@
       markup = true;
       format = "<b>%s</b>\\n%b";
       font = "JetBrainsMono Nerd Font 12";
-
-      "[urgency=critical]" = {
-        default-timeout = 0;
-      };
     };
   };
 }

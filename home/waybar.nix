@@ -71,6 +71,7 @@
           tooltip-format-disconnected = "Disconnected";
           interval = 3;
           spacing = 1;
+          on-click = "nm-connection-editor";
         };
 
         battery = {
@@ -99,11 +100,13 @@
           format-connected = "󰂱";
           format-no-controller = "";
           tooltip-format = "Devices connected: {num_connections}";
+          on-click = "blueman-manager";
         };
 
         pulseaudio = {
           format = "{icon}";
-          on-click = "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle";
+          on-click = "pavucontrol";
+          on-click-right = "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle";
           tooltip-format = "Playing at {volume}%";
           scroll-step = 5;
           format-muted = "";

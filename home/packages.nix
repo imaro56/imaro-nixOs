@@ -44,6 +44,10 @@
     cliphist
     brightnessctl
     playerctl
+    blueman
+    pavucontrol
+    networkmanagerapplet
+    libnotify
 
     # Media
     mpv
