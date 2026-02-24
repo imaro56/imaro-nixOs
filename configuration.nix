@@ -130,6 +130,12 @@
   # Wayland
   environment.sessionVariables.NIXOS_OZONE_WL = "1";
 
+  # Portal config (tells xdg-desktop-portal which backend to use per DE)
+  xdg.portal.config = {
+    gnome.default = [ "gnome" "gtk" ];
+    hyprland.default = [ "hyprland" "gtk" ];
+  };
+
   # System Packages
   nixpkgs.config.allowUnfree = true;
   environment.systemPackages = with pkgs; [
