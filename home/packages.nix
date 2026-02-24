@@ -37,15 +37,13 @@
 
     # Hyprland
     waybar
-    mako
     hyprpaper
-    hyprlock
-    hypridle
     grim
     slurp
     wlogout
     cliphist
     brightnessctl
+    playerctl
 
     # Media
     mpv

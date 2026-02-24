@@ -11,6 +11,9 @@
     ./gnome.nix
     ./hyprland.nix
     ./waybar.nix
+    ./mako.nix
+    ./hypridle.nix
+    ./hyprlock.nix
   ];
 
   home.username = "imaro56";
