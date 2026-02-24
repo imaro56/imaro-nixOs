@@ -19,7 +19,11 @@ in
     settings = {
       "$mod" = "SUPER";
 
-      monitor = ",preferred,auto,1";
+      monitor = [
+        "eDP-1, 1920x1080@165, 0x0, 1"
+        "DP-3, 1920x1080@60, 1920x0, 1"
+        "DP-4, 1920x1080@60, 3840x0, 1, transform, 1"
+      ];
 
       env = [
         "XCURSOR_SIZE,24"
@@ -74,9 +78,7 @@ in
         };
       };
 
-      gestures = {
-        workspace_swipe = true;
-      };
+      gesture = "3, horizontal, workspace";
 
       dwindle = {
         pseudotile = true;
@@ -87,6 +89,19 @@ in
         disable_hyprland_logo = true;
         force_default_wallpaper = 0;
       };
+
+      workspace = [
+        "1, monitor:eDP-1, default:true"
+        "2, monitor:DP-3, default:true"
+        "3, monitor:DP-3"
+        "4, monitor:DP-3"
+        "5, monitor:DP-3"
+        "6, monitor:DP-3"
+        "7, monitor:DP-3"
+        "8, monitor:DP-3"
+        "9, monitor:DP-3"
+        "10, monitor:DP-4, default:true"
+      ];
 
       bind = [
         # Apps

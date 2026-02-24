@@ -10,6 +10,7 @@
     ./packages.nix
     ./gnome.nix
     ./hyprland.nix
+    ./waybar.nix
   ];
 
   home.username = "imaro56";

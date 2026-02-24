@@ -11,7 +11,7 @@
     ripgrep
     btop
     unzip
-    lf
+    yazi
     fastfetch
 
     # Disk usage
@@ -33,14 +33,22 @@
 
     # GNOME extensions
     gnomeExtensions.blur-my-shell
+    gnomeExtensions.appindicator
 
     # Hyprland
     waybar
     mako
     hyprpaper
     hyprlock
+    hypridle
     grim
     slurp
+    wlogout
+    cliphist
+    brightnessctl
+
+    # Media
+    mpv
 
     # Rofi
     rofi
