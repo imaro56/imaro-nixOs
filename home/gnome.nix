@@ -51,6 +51,7 @@
 
     "org/gnome/desktop/wm/preferences" = {
       num-workspaces = 6;
+      focus-mode = "sloppy"; # focus window under mouse without clicking
     };
 
     # Window management and workspace keybindings
