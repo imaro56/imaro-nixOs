@@ -241,12 +241,12 @@ in
         "ALT, TAB, bringactivetotop"
 
         # Scratchpad
-        "$mod, S, togglespecialworkspace, scratchpad"
-        "$mod ALT, S, movetoworkspacesilent, special:scratchpad"
+        "$mod, grave, togglespecialworkspace, scratchpad"
+        "$mod ALT, grave, movetoworkspacesilent, special:scratchpad"
 
         # Screenshots
         ''$mod SHIFT, S, exec, grim -g "$(slurp)" - | wl-copy''
-        ''$mod SHIFT, F, exec, grim -o $(hyprctl activeworkspace -j | jq -r '.monitor') - | wl-copy''
+        '', Print, exec, grim -g "$(slurp)" - | wl-copy''
 
         # Session
         "$mod, ESCAPE, exec, hyprlock"
