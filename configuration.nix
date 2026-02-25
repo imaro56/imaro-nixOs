@@ -163,6 +163,10 @@
   virtualisation.docker.enable = true;
   virtualisation.docker.enableOnBoot = false;
   programs.nix-ld.enable = true;
+  programs.nh = {
+    enable = true;
+    flake = "/home/imaro56/nixos-config";
+  };
 
   system.stateVersion = "25.11";
 }
