@@ -8,6 +8,7 @@
         "notification-timeout@chlumsern.gmail.com"
         "tilingshell@ferrarodomenico.com"
         "appindicatorsupport@rgcjonas.gmail.com"
+        "clipboard-history@alexsaveau.dev"
       ];
     };
     # Keyboard layout

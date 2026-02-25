@@ -35,6 +35,7 @@
     gnomeExtensions.appindicator
     gnomeExtensions.notification-timeout
     gnomeExtensions.tiling-shell
+    gnomeExtensions.clipboard-history
 
     # Utilities
     pavucontrol
