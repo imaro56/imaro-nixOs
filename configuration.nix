@@ -25,7 +25,7 @@
   # Boot
   boot.loader = {
     efi.canTouchEfiVariables = true;
-    timeout = 10;
+    timeout = 3;
 
     systemd-boot = {
       enable = true;
@@ -56,10 +56,18 @@
   # SSD (Samsung 990 Pro NVMe)
   fileSystems."/".options = [ "noatime" ];
   services.fstrim.enable = true;
+  services.udev.extraRules = ''
+    ACTION=="add|change", KERNEL=="nvme[0-9]*", ATTR{queue/scheduler}="none"
+  '';
+  services.avahi.enable = false;
   boot.kernel.sysctl = {
     "vm.swappiness" = 10;
     "vm.dirty_writeback_centisecs" = 1500;
     "vm.vfs_cache_pressure" = 50;
+    "vm.page-cluster" = 0; # read single pages from zram (better for compressed swap)
+    "net.core.default_qdisc" = "cake"; # better network queuing
+    "net.ipv4.tcp_congestion_control" = "bbr"; # faster TCP
+    "kernel.nmi_watchdog" = 0; # save CPU cycles
   };
 
   # Zram (compressed RAM swap - same as Windows memory compression)
