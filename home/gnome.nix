@@ -11,7 +11,7 @@
     # Keyboard layout
     "org/gnome/desktop/input-sources" = {
       xkb-options = [
-        "grp:win_space_toggle"
+        "grp:alt_shift_toggle"
         "caps:swapescape"
       ];
     };
