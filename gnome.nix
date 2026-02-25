@@ -6,8 +6,19 @@
   services.xserver.xkb = {
     layout = "us,ua";
     options = lib.concatStringsSep "," [
-      "grp:win_space_toggle" # Super+Space to toggle language
-      "caps:swapescape" # Swap Esc and CapsLock
+      "grp:caps_toggle" # CapsLock toggles language (keyd swaps physical keys before XKB)
     ];
+  };
+
+  # Swap Escape and CapsLock at input level (before XKB)
+  services.keyd = {
+    enable = true;
+    keyboards.default = {
+      ids = [ "*" ];
+      settings.main = {
+        capslock = "escape";
+        escape = "capslock";
+      };
+    };
   };
 }

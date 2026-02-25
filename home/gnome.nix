@@ -6,14 +6,21 @@
     "org/gnome/shell" = {
       enabled-extensions = [
         "blur-my-shell@aunetx"
+        "notification-timeout@chlumsern.gmail.com"
       ];
     };
     # Keyboard layout
     "org/gnome/desktop/input-sources" = {
       xkb-options = [
-        "grp:alt_shift_toggle"
-        "caps:swapescape"
+        "grp:caps_toggle"
       ];
+    };
+
+    # Notification timeout (5 seconds)
+    "org/gnome/shell/extensions/notification-timeout" = {
+      timeout = 5000;
+      ignore-idle = true;
+      always-normal = true;
     };
 
     # Touchpad
@@ -32,9 +39,23 @@
       show-screenshot-ui = [ "<Shift><Super>s" ];
     };
 
+    # Workspaces
+    "org/gnome/mutter" = {
+      dynamic-workspaces = false;
+      num-workspaces = 10;
+    };
+
+    "org/gnome/desktop/wm/preferences" = {
+      num-workspaces = 10;
+    };
+
     # Window management and workspace keybindings
     "org/gnome/desktop/wm/keybindings" = {
-      close = [ "<Super>q" ];
+      # Disable Super+Space language toggle (only CapsLock toggles)
+      switch-input-source = [];
+      switch-input-source-backward = [];
+
+      close = [ "<Super>w" ];
       toggle-maximized = [ "<Super>m" ];
       minimize = [ "<Super>comma" ];
 

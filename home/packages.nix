@@ -34,6 +34,7 @@
     # GNOME extensions
     gnomeExtensions.blur-my-shell
     gnomeExtensions.appindicator
+    gnomeExtensions.notification-timeout
 
     # Utilities
     pavucontrol
