@@ -52,6 +52,7 @@
       dwindle = {
         pseudotile = true;
         preserve_split = true;
+        force_split = 2;
       };
 
       cursor = {
@@ -64,9 +65,21 @@
         disable_splash_rendering = true;
       };
 
-      render = {
-        explicit_sync = 1;
-      };
+      workspace = [
+        # Left monitor (eDP-2) — comms & reference
+        "1, monitor:eDP-2, default:true"
+        "2, monitor:eDP-2"
+        # Center monitor (DP-3) — main work
+        "3, monitor:DP-3, default:true"
+        "4, monitor:DP-3"
+        "5, monitor:DP-3"
+        "6, monitor:DP-3"
+        "7, monitor:DP-3"
+        "8, monitor:DP-3"
+        # Right monitor (DP-4) — logs & docs (portrait)
+        "9, monitor:DP-4, default:true"
+        "10, monitor:DP-4"
+      ];
 
       env = [
         "XCURSOR_SIZE,24"
@@ -86,17 +99,25 @@
         "$mod, M, fullscreen"
         "$mod, F, togglefloating"
 
-        # Focus (vim)
+        # Focus (vim + arrows)
         "$mod, H, movefocus, l"
         "$mod, J, movefocus, d"
         "$mod, K, movefocus, u"
         "$mod, L, movefocus, r"
+        "$mod, left, movefocus, l"
+        "$mod, down, movefocus, d"
+        "$mod, up, movefocus, u"
+        "$mod, right, movefocus, r"
 
-        # Move window (vim)
+        # Move window (vim + arrows)
         "$mod SHIFT, H, movewindow, l"
         "$mod SHIFT, J, movewindow, d"
         "$mod SHIFT, K, movewindow, u"
         "$mod SHIFT, L, movewindow, r"
+        "$mod SHIFT, left, movewindow, l"
+        "$mod SHIFT, down, movewindow, d"
+        "$mod SHIFT, up, movewindow, u"
+        "$mod SHIFT, right, movewindow, r"
 
         # Workspaces
         "$mod, 1, workspace, 1"
@@ -122,12 +143,42 @@
         "$mod SHIFT, 9, movetoworkspace, 9"
         "$mod SHIFT, 0, movetoworkspace, 10"
 
+        # Scroll workspaces
+        "$mod ALT, H, workspace, r-1"
+        "$mod ALT, L, workspace, r+1"
+        "$mod ALT, left, workspace, r-1"
+        "$mod ALT, right, workspace, r+1"
+
+        # Scratchpad (special workspace)
+        "$mod, grave, togglespecialworkspace, scratchpad"
+        "$mod SHIFT, grave, movetoworkspace, special:scratchpad"
+
+        # Monitor focus (left / center / right)
+        "$mod, comma, focusmonitor, eDP-2"
+        "$mod, period, focusmonitor, DP-3"
+        "$mod, slash, focusmonitor, DP-4"
+
+        # Move to workspace silently (stay on current)
+        "$mod CTRL, 1, movetoworkspacesilent, 1"
+        "$mod CTRL, 2, movetoworkspacesilent, 2"
+        "$mod CTRL, 3, movetoworkspacesilent, 3"
+        "$mod CTRL, 4, movetoworkspacesilent, 4"
+        "$mod CTRL, 5, movetoworkspacesilent, 5"
+        "$mod CTRL, 6, movetoworkspacesilent, 6"
+        "$mod CTRL, 7, movetoworkspacesilent, 7"
+        "$mod CTRL, 8, movetoworkspacesilent, 8"
+        "$mod CTRL, 9, movetoworkspacesilent, 9"
+        "$mod CTRL, 0, movetoworkspacesilent, 10"
+
         # Screenshot
-        "$mod, S, exec, grimblast --freeze copy area"
-        "$mod SHIFT, S, exec, grimblast --freeze copy screen"
+        "$mod, S, exec, grimblast --freeze copysave area ~/Pictures/Screenshots/$(date +'%Y-%m-%d_%H-%M-%S').png"
+        "$mod SHIFT, S, exec, grimblast --freeze copysave screen ~/Pictures/Screenshots/$(date +'%Y-%m-%d_%H-%M-%S').png"
 
         # Lock
         "$mod, Escape, exec, hyprlock"
+
+        # Reload config
+        "$mod SHIFT, R, exec, hyprctl reload"
 
         # Clipboard history
         "$mod, V, exec, cliphist list | rofi -dmenu | cliphist decode | wl-copy"
@@ -156,16 +207,12 @@
         "waybar"
         "mako"
         "hypridle"
-        "wl-paste --watch cliphist store"
-        "hyprpaper"
+        "wl-paste --type text --watch cliphist store"
+        "wl-paste --type image --watch cliphist store"
+        "swww-daemon"
+        "swww img /home/imaro56/wallpaper.png"
       ];
     };
   };
 
-  # Hyprpaper wallpaper config
-  xdg.configFile."hypr/hyprpaper.conf".text = ''
-    preload = ~/wallpaper.png
-    wallpaper = , ~/wallpaper.png
-    splash = false
-  '';
 }

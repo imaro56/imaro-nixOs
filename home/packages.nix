@@ -43,7 +43,7 @@
     cliphist
     brightnessctl
     playerctl
-    hyprpaper
+    swww
     nautilus
 
     # Utilities
