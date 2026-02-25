@@ -31,22 +31,24 @@
     };
 
     # Disable Super+N app switching (frees Super+N for workspaces)
+    # Disable Super+M message tray (frees Super+M for toggle-maximized)
     "org/gnome/shell/keybindings" = {
       switch-to-application-1 = [];
       switch-to-application-2 = [];
       switch-to-application-3 = [];
       switch-to-application-4 = [];
+      toggle-message-tray = [];
       show-screenshot-ui = [ "<Shift><Super>s" ];
     };
 
     # Workspaces
     "org/gnome/mutter" = {
       dynamic-workspaces = false;
-      num-workspaces = 10;
+      num-workspaces = 6;
     };
 
     "org/gnome/desktop/wm/preferences" = {
-      num-workspaces = 10;
+      num-workspaces = 6;
     };
 
     # Window management and workspace keybindings
@@ -66,10 +68,6 @@
       switch-to-workspace-4 = [ "<Super>4" ];
       switch-to-workspace-5 = [ "<Super>5" ];
       switch-to-workspace-6 = [ "<Super>6" ];
-      switch-to-workspace-7 = [ "<Super>7" ];
-      switch-to-workspace-8 = [ "<Super>8" ];
-      switch-to-workspace-9 = [ "<Super>9" ];
-      switch-to-workspace-10 = [ "<Super>0" ];
 
       # Move window to workspace
       move-to-workspace-1 = [ "<Shift><Super>1" ];
@@ -78,10 +76,6 @@
       move-to-workspace-4 = [ "<Shift><Super>4" ];
       move-to-workspace-5 = [ "<Shift><Super>5" ];
       move-to-workspace-6 = [ "<Shift><Super>6" ];
-      move-to-workspace-7 = [ "<Shift><Super>7" ];
-      move-to-workspace-8 = [ "<Shift><Super>8" ];
-      move-to-workspace-9 = [ "<Shift><Super>9" ];
-      move-to-workspace-10 = [ "<Shift><Super>0" ];
 
       # Window switching
       switch-windows = [ "<Alt>Tab" ];
