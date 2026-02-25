@@ -9,11 +9,6 @@
     ./git.nix
     ./packages.nix
     ./gnome.nix
-    ./hyprland.nix
-    ./waybar.nix
-    ./mako.nix
-    ./hypridle.nix
-    ./hyprlock.nix
   ];
 
   home.username = "imaro56";
@@ -33,7 +28,6 @@
     config = {
       common.default = [ "gtk" ];
       gnome.default = [ "gnome" "gtk" ];
-      hyprland.default = [ "hyprland" "gtk" ];
     };
   };
 

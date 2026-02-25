@@ -35,25 +35,12 @@
     gnomeExtensions.blur-my-shell
     gnomeExtensions.appindicator
 
-    # Hyprland
-    waybar
-    hyprpaper
-    grim
-    slurp
-    wlogout
-    cliphist
-    brightnessctl
-    playerctl
-    blueman
+    # Utilities
     pavucontrol
-    networkmanagerapplet
     libnotify
 
     # Media
     mpv
-
-    # Rofi
-    rofi
 
     # Notes
     obsidian

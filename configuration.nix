@@ -4,7 +4,6 @@
   imports = [
     ./hardware-configuration.nix
     ./gnome.nix
-    ./hyprland.nix
   ];
 
   # Nix
