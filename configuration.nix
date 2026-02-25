@@ -59,6 +59,14 @@
   boot.kernel.sysctl = {
     "vm.swappiness" = 10;
     "vm.dirty_writeback_centisecs" = 1500;
+    "vm.vfs_cache_pressure" = 50;
+  };
+
+  # Zram (compressed RAM swap - same as Windows memory compression)
+  zramSwap = {
+    enable = true;
+    algorithm = "zstd";
+    memoryPercent = 50;
   };
 
   # Networking
@@ -94,7 +102,7 @@
     nvidiaSettings = true;
     package = config.boot.kernelPackages.nvidiaPackages.stable;
     powerManagement.enable = true;
-    powerManagement.finegrained = true;
+    powerManagement.finegrained = false;
     prime = {
       offload = {
         enable = true;
