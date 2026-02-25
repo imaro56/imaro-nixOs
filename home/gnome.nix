@@ -40,10 +40,11 @@
       show-screenshot-ui = [ "<Shift><Super>s" ];
     };
 
-    # Workspaces
+    # Workspaces & compositing
     "org/gnome/mutter" = {
       dynamic-workspaces = false;
       num-workspaces = 6;
+      experimental-features = [ "variable-refresh-rate" ];
     };
 
     "org/gnome/desktop/wm/preferences" = {
