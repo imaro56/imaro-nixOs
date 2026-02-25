@@ -26,7 +26,6 @@
 
       # -- Transparency --
       background-opacity = 0.98;
-      background-blur = 20;
       unfocused-split-opacity = 0.85;
 
       # -- Cursor --
