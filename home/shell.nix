@@ -27,7 +27,8 @@ in
       enable = true;
       shellAliases = {
         rebuild = "cd ~/nixos-config && git add . && sudo nixos-rebuild switch --flake .";
-        conf = "cd ~/nixos-config && vim .";
+        reboot = "cd ~/nixos-config && git add . && sudo nixos-rebuild boot --flake . && sudo reboot";
+        conf = "cd ~/nixos-config && nvim .";
       };
       shellAbbrs = {
         "--help" = {
