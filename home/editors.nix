@@ -2,20 +2,28 @@
 
 {
   programs = {
-    vscode = {
-      enable = true;
-      package = pkgs.vscode.fhs;
-    };
-
     neovim = {
       enable = true;
       defaultEditor = true;
       vimAlias = true;
-      extraConfig = ''
-        set clipboard=unnamedplus
-        set number
-        set relativenumber
-      '';
+      # No extraConfig - LazyVim manages everything via ~/.config/nvim
+    };
+
+    # Zed - fast GPU-accelerated editor
+    zed-editor = {
+      enable = true;
+      extraPackages = with pkgs; [
+        nixd
+        nil
+      ];
     };
   };
+
+  # LazyVim runtime dependencies
+  home.packages = with pkgs; [
+    gcc # treesitter compilation
+    gnumake
+    fd # file finder (used by telescope)
+    lazygit # git TUI (LazyVim integrates with it)
+  ];
 }
