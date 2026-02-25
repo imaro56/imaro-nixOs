@@ -6,6 +6,8 @@
     "org/gnome/shell" = {
       enabled-extensions = [
         "notification-timeout@chlumsern.gmail.com"
+        "tilingshell@ferrarodomenico.com"
+        "appindicatorsupport@rgcjonas.gmail.com"
       ];
     };
     # Keyboard layout

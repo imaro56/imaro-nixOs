@@ -34,6 +34,7 @@
     # GNOME extensions
     gnomeExtensions.appindicator
     gnomeExtensions.notification-timeout
+    gnomeExtensions.tiling-shell
 
     # Utilities
     pavucontrol
