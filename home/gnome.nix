@@ -5,7 +5,6 @@
     # Enable GNOME extensions
     "org/gnome/shell" = {
       enabled-extensions = [
-        "blur-my-shell@aunetx"
         "notification-timeout@chlumsern.gmail.com"
       ];
     };

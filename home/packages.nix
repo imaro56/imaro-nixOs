@@ -32,7 +32,6 @@
     playwright-mcp
 
     # GNOME extensions
-    gnomeExtensions.blur-my-shell
     gnomeExtensions.appindicator
     gnomeExtensions.notification-timeout
 
