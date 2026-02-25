@@ -37,6 +37,15 @@
     gnomeExtensions.tiling-shell
     gnomeExtensions.clipboard-history
 
+    # Hyprland tools
+    rofi
+    grimblast
+    cliphist
+    brightnessctl
+    playerctl
+    hyprpaper
+    nautilus
+
     # Utilities
     pavucontrol
     libnotify

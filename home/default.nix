@@ -9,6 +9,11 @@
     ./git.nix
     ./packages.nix
     ./gnome.nix
+    ./hyprland.nix
+    ./waybar.nix
+    ./mako.nix
+    ./hyprlock.nix
+    ./hypridle.nix
   ];
 
   home.username = "imaro56";
@@ -24,9 +29,13 @@
 
   xdg.portal = {
     enable = lib.mkForce true;
-    extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
+    extraPortals = [
+      pkgs.xdg-desktop-portal-hyprland
+      pkgs.xdg-desktop-portal-gtk
+    ];
     config = {
       common.default = [ "gtk" ];
+      hyprland.default = [ "hyprland" "gtk" ];
       gnome.default = [ "gnome" "gtk" ];
     };
   };

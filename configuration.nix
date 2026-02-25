@@ -4,6 +4,7 @@
   imports = [
     ./hardware-configuration.nix
     ./gnome.nix
+    ./hyprland.nix
   ];
 
   # Nix
@@ -141,6 +142,26 @@
     shell = pkgs.fish;
   };
   security.sudo.wheelNeedsPassword = false;
+
+  # Display & Input
+  services.xserver.enable = true;
+  services.displayManager.gdm.enable = true;
+  services.xserver.xkb = {
+    layout = "us,ua";
+    options = "grp:caps_toggle";
+  };
+
+  # Swap Escape and CapsLock at input level (before XKB)
+  services.keyd = {
+    enable = true;
+    keyboards.default = {
+      ids = [ "*" ];
+      settings.main = {
+        capslock = "escape";
+        escape = "capslock";
+      };
+    };
+  };
 
   # Wayland
   environment.sessionVariables.NIXOS_OZONE_WL = "1";
