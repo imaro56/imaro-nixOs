@@ -20,8 +20,7 @@
       window-padding-y = 14;
       window-padding-balance = true;
       window-padding-color = "background";
-      window-decoration = "auto";
-      gtk-titlebar-style = "tabs";
+      window-decoration = false;
       gtk-single-instance = "desktop";
 
       # -- Transparency --
@@ -64,7 +63,9 @@
       keybind = [
         "clear"
 
-        # Clipboard
+        # Clipboard (performable: only triggers when action is possible, otherwise passes through)
+        "performable:ctrl+c=copy_to_clipboard"
+        "performable:ctrl+v=paste_from_clipboard"
         "ctrl+shift+c=copy_to_clipboard"
         "ctrl+shift+v=paste_from_clipboard"
 
