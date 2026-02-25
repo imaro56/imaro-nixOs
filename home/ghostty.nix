@@ -1,6 +1,8 @@
 { ... }:
 
 {
+  xdg.configFile."ghostty/shaders/cursor_tail.glsl".text = builtins.readFile ./shaders/cursor_tail.glsl;
+
   programs.ghostty = {
     enable = true;
     enableFishIntegration = true;
@@ -30,6 +32,10 @@
       # -- Cursor --
       cursor-style = "block";
       cursor-style-blink = false;
+
+      # -- Animations --
+      custom-shader = "shaders/cursor_tail.glsl";
+      custom-shader-animation = "always";
 
       # -- Clipboard --
       clipboard-read = "allow";
@@ -65,7 +71,6 @@
 
         # Clipboard (performable: only triggers when action is possible, otherwise passes through)
         "performable:ctrl+c=copy_to_clipboard"
-        "performable:ctrl+v=paste_from_clipboard"
         "ctrl+shift+c=copy_to_clipboard"
         "ctrl+shift+v=paste_from_clipboard"
 
