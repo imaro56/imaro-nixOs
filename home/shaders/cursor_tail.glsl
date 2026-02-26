@@ -5,8 +5,8 @@
 vec4 TRAIL_COLOR = iCurrentCursorColor;
 const float DURATION = 0.09;
 const float MAX_TRAIL_LENGTH = 0.2;
-const float THRESHOLD_MIN_DISTANCE = 1.5;
-const float BLUR = 2.0;
+const float THRESHOLD_MIN_DISTANCE = 5.0;
+const float BLUR = 1.0;
 
 // --- CONSTANTS for easing functions ---
 const float PI = 3.14159265359;
@@ -99,7 +99,7 @@ void mainImage(out vec4 fragColor, in vec2 fragCoord){
 
     float minDist = currentCursor.w * THRESHOLD_MIN_DISTANCE;
     float progress = clamp((iTime - iTimeCursorChange) / DURATION, 0.0, 1.0);
-    if (lineLength > minDist) {
+    if (lineLength > minDist && progress < 1.0) {
         float head_eased = 0.0;
         float tail_eased = 0.0;
 
@@ -150,6 +150,7 @@ void mainImage(out vec4 fragColor, in vec2 fragCoord){
 
         vec4 trail = TRAIL_COLOR;
         float trailAlpha = antialising(sdfTrail);
+        trailAlpha *= step(0.05, trailAlpha);
         newColor = mix(newColor, trail, trailAlpha);
 
         newColor = mix(newColor, fragColor, step(sdfCurrentCursor, 0.));

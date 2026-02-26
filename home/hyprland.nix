@@ -144,19 +144,16 @@
         "$mod SHIFT, 0, movetoworkspace, 10"
 
         # Scroll workspaces
-        "$mod ALT, H, workspace, r-1"
-        "$mod ALT, L, workspace, r+1"
-        "$mod ALT, left, workspace, r-1"
-        "$mod ALT, right, workspace, r+1"
+        "$mod, bracketleft, workspace, r-1"
+        "$mod, bracketright, workspace, r+1"
 
-        # Scratchpad (special workspace)
-        "$mod, grave, togglespecialworkspace, scratchpad"
-        "$mod SHIFT, grave, movetoworkspace, special:scratchpad"
+        # Move to adjacent workspace + follow
+        "$mod SHIFT, bracketleft, movetoworkspace, r-1"
+        "$mod SHIFT, bracketright, movetoworkspace, r+1"
 
-        # Monitor focus (left / center / right)
-        "$mod, comma, focusmonitor, eDP-2"
-        "$mod, period, focusmonitor, DP-3"
-        "$mod, slash, focusmonitor, DP-4"
+        # Move to adjacent workspace silently
+        "$mod CTRL, bracketleft, movetoworkspacesilent, r-1"
+        "$mod CTRL, bracketright, movetoworkspacesilent, r+1"
 
         # Move to workspace silently (stay on current)
         "$mod CTRL, 1, movetoworkspacesilent, 1"
@@ -169,6 +166,15 @@
         "$mod CTRL, 8, movetoworkspacesilent, 8"
         "$mod CTRL, 9, movetoworkspacesilent, 9"
         "$mod CTRL, 0, movetoworkspacesilent, 10"
+
+        # Scratchpad (special workspace)
+        "$mod, grave, togglespecialworkspace, scratchpad"
+        "$mod SHIFT, grave, movetoworkspace, special:scratchpad"
+
+        # Monitor focus (left / center / right)
+        "$mod, comma, focusmonitor, eDP-2"
+        "$mod, period, focusmonitor, DP-3"
+        "$mod, slash, focusmonitor, DP-4"
 
         # Screenshot
         "$mod, S, exec, grimblast --freeze copysave area ~/Pictures/Screenshots/$(date +'%Y-%m-%d_%H-%M-%S').png"
