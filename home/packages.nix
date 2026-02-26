@@ -38,7 +38,6 @@
     gnomeExtensions.clipboard-history
 
     # Hyprland tools
-    rofi
     grimblast
     cliphist
     brightnessctl

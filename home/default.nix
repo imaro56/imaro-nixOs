@@ -11,6 +11,7 @@
     ./gnome.nix
     ./hyprland.nix
     ./waybar.nix
+    ./rofi.nix
     ./mako.nix
     ./hyprlock.nix
     ./hypridle.nix
