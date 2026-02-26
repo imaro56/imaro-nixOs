@@ -8,9 +8,9 @@ let
 
     case "$STATE" in
       0)
-        read -r cpu_a1 idle_a1 <<< "$(awk '/^cpu / {print $2+$3+$4+$5+$6+$7+$8, $5}' /proc/stat)"
+        read -r cpu_a1 idle_a1 <<< "$(awk '/^cpu / {print $2+$3+$4+$5+$6+$7+$8, $5+$6}' /proc/stat)"
         sleep 1
-        read -r cpu_a2 idle_a2 <<< "$(awk '/^cpu / {print $2+$3+$4+$5+$6+$7+$8, $5}' /proc/stat)"
+        read -r cpu_a2 idle_a2 <<< "$(awk '/^cpu / {print $2+$3+$4+$5+$6+$7+$8, $5+$6}' /proc/stat)"
         total=$((cpu_a2 - cpu_a1))
         idle=$((idle_a2 - idle_a1))
         if [ "$total" -gt 0 ]; then

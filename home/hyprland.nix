@@ -168,8 +168,8 @@
         "$mod CTRL, 0, movetoworkspacesilent, 10"
 
         # Scratchpad (special workspace)
-        "$mod, grave, togglespecialworkspace, scratchpad"
-        "$mod SHIFT, grave, movetoworkspacesilent, special:scratchpad"
+        "$mod, S, togglespecialworkspace, scratchpad"
+        "$mod SHIFT, S, movetoworkspacesilent, special:scratchpad"
 
         # Monitor focus (left / center / right)
         "$mod, comma, focusmonitor, eDP-2"
@@ -177,8 +177,8 @@
         "$mod, slash, focusmonitor, DP-4"
 
         # Screenshot
-        "$mod, S, exec, grimblast --freeze copysave area ~/Pictures/Screenshots/$(date +'%Y-%m-%d_%H-%M-%S').png"
-        "$mod SHIFT, S, exec, grimblast --freeze copysave screen ~/Pictures/Screenshots/$(date +'%Y-%m-%d_%H-%M-%S').png"
+        ", Print, exec, grimblast --freeze copysave area ~/Pictures/Screenshots/$(date +'%Y-%m-%d_%H-%M-%S').png"
+        "$mod, Print, exec, grimblast --freeze copysave screen ~/Pictures/Screenshots/$(date +'%Y-%m-%d_%H-%M-%S').png"
 
         # Lock
         "$mod, Escape, exec, hyprlock"
