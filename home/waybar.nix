@@ -1,56 +1,6 @@
 { pkgs, ... }:
 
 let
-  sysmonScript = pkgs.writeShellScript "waybar-sysmon" ''
-    STATE_FILE="/tmp/waybar-sysmon-state"
-    [ -f "$STATE_FILE" ] || echo 0 > "$STATE_FILE"
-    STATE=$(cat "$STATE_FILE")
-
-    case "$STATE" in
-      0)
-        read -r cpu_a1 idle_a1 <<< "$(awk '/^cpu / {print $2+$3+$4+$5+$6+$7+$8, $5+$6}' /proc/stat)"
-        sleep 1
-        read -r cpu_a2 idle_a2 <<< "$(awk '/^cpu / {print $2+$3+$4+$5+$6+$7+$8, $5+$6}' /proc/stat)"
-        total=$((cpu_a2 - cpu_a1))
-        idle=$((idle_a2 - idle_a1))
-        if [ "$total" -gt 0 ]; then
-          usage=$(( (total - idle) * 100 / total ))
-        else
-          usage=0
-        fi
-        printf '{"text": "CPU %s%%", "tooltip": "CPU Usage: %s%%", "class": "cpu"}\n' "$usage" "$usage"
-        ;;
-      1)
-        read -r total available <<< "$(awk '/^MemTotal:/{t=$2} /^MemAvailable:/{a=$2} END{print t, a}' /proc/meminfo)"
-        used=$(( (total - available) / 1024 ))
-        total_mb=$(( total / 1024 ))
-        pct=$(( (total - available) * 100 / total ))
-        printf '{"text": "RAM %s%%", "tooltip": "RAM: %sMB / %sMB", "class": "ram"}\n' "$pct" "$used" "$total_mb"
-        ;;
-      2)
-        temp="N/A"
-        for hwmon in /sys/class/hwmon/hwmon*; do
-          if [ -f "$hwmon/name" ] && [ "$(cat "$hwmon/name")" = "k10temp" ]; then
-            if [ -f "$hwmon/temp1_input" ]; then
-              raw=$(cat "$hwmon/temp1_input")
-              temp=$(( raw / 1000 ))
-            fi
-            break
-          fi
-        done
-        printf '{"text": "Temp %s°C", "tooltip": "CPU Temperature: %s°C", "class": "temp"}\n' "$temp" "$temp"
-        ;;
-    esac
-  '';
-
-  sysmonToggle = pkgs.writeShellScript "waybar-sysmon-toggle" ''
-    STATE_FILE="/tmp/waybar-sysmon-state"
-    [ -f "$STATE_FILE" ] || echo 0 > "$STATE_FILE"
-    STATE=$(cat "$STATE_FILE")
-    NEXT=$(( (STATE + 1) % 3 ))
-    echo "$NEXT" > "$STATE_FILE"
-  '';
-
   bluetoothScript = pkgs.writeShellScript "waybar-bluetooth" ''
     powered=$(bluetoothctl show 2>/dev/null | grep "Powered:" | awk '{print $2}')
     if [ "$powered" != "yes" ]; then
@@ -60,7 +10,7 @@ let
 
     connected_device=$(bluetoothctl devices Connected 2>/dev/null | head -1 | cut -d' ' -f3-)
     if [ -n "$connected_device" ]; then
-      printf '{"text": "󰂱 %s", "tooltip": "Connected: %s", "class": "connected"}\n' "$connected_device" "$connected_device"
+      printf '{"text": "󰂱", "tooltip": "Connected: %s", "class": "connected"}\n' "$connected_device"
     else
       printf '{"text": "󰂯", "tooltip": "Bluetooth on", "class": "on"}\n'
     fi
@@ -74,12 +24,26 @@ in
       mainBar = {
         layer = "top";
         position = "top";
-        height = 34;
-        spacing = 4;
+        height = 0;
+        spacing = 0;
+        margin-top = 4;
+        margin-left = 6;
+        margin-right = 6;
 
         modules-left = [ "hyprland/workspaces" ];
         modules-center = [ "clock" ];
-        modules-right = [ "custom/sysmon" "network" "custom/bluetooth" "pulseaudio" "battery" "tray" ];
+        modules-right = [
+          "tray"
+          "idle_inhibitor"
+          "memory"
+          "temperature"
+          "hyprland/language"
+          "network"
+          "custom/bluetooth"
+          "backlight"
+          "pulseaudio"
+          "battery"
+        ];
 
         "hyprland/workspaces" = {
           format = "{id}";
@@ -89,16 +53,33 @@ in
         };
 
         clock = {
-          format = "{:%H:%M}";
-          format-alt = "{:%A, %B %d  %H:%M}";
+          format = "󰥔 {:%H:%M}";
+          format-alt = "󰃶 {:%A, %B %d  %H:%M}";
           tooltip-format = "{:%A, %B %d, %Y}";
         };
 
-        "custom/sysmon" = {
-          exec = toString sysmonScript;
-          return-type = "json";
+        memory = {
           interval = 2;
-          on-click = toString sysmonToggle;
+          format = "  {percentage}%";
+          tooltip-format = "{used:0.1f}G / {total:0.1f}G";
+          on-click = "ghostty -e btop";
+        };
+
+        temperature = {
+          hwmon-path-abs = "/sys/devices/pci0000:00/0000:00:18.3/hwmon";
+          input-filename = "temp1_input";
+          interval = 2;
+          critical-threshold = 85;
+          format = " {temperatureC}°C";
+          format-critical = " {temperatureC}°C";
+          tooltip-format = "CPU Temperature: {temperatureC}°C";
+          on-click = "ghostty -e btop";
+        };
+
+        "hyprland/language" = {
+          format = "󰌌 {}";
+          format-en = "EN";
+          format-uk = "UA";
         };
 
         network = {
@@ -115,7 +96,25 @@ in
           exec = toString bluetoothScript;
           return-type = "json";
           interval = 5;
-          on-click = "ghostty -e bluetoothctl";
+          on-click = "overskride";
+        };
+
+        backlight = {
+          format = "{icon} {percent}%";
+          format-icons = [ "󰃞" "󰃟" "󰃠" ];
+          tooltip-format = "Brightness: {percent}%";
+          on-scroll-up = "brightnessctl set +5%";
+          on-scroll-down = "brightnessctl set 5%-";
+        };
+
+        pulseaudio = {
+          format = "{icon} {volume}%";
+          format-muted = "󰝟 {volume}%";
+          format-icons.default = [ "󰕿" "󰖀" "󰕾" ];
+          on-click = "pavucontrol";
+          on-click-right = "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle";
+          on-scroll-up = "wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+";
+          on-scroll-down = "wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-";
         };
 
         battery = {
@@ -123,10 +122,10 @@ in
           adapter = "ADP0";
           interval = 30;
           design-capacity = false;
-          format = "{icon}  {capacity}%";
-          format-charging = "󰂄  {capacity}%";
-          format-plugged = "󰚥  {capacity}%";
-          format-full = "󰁹  Full";
+          format = "{icon} {capacity}%";
+          format-charging = "󰂄 {capacity}%";
+          format-plugged = "󰚥 {capacity}%";
+          format-full = "󰁹 Full";
           format-icons = [ "󰁺" "󰁻" "󰁼" "󰁽" "󰁾" "󰁿" "󰂀" "󰂁" "󰂂" "󰁹" ];
           states = {
             good = 80;
@@ -138,120 +137,152 @@ in
           tooltip-format-full = "Full\nHealth: {health}%";
         };
 
-        pulseaudio = {
+        idle_inhibitor = {
           format = "{icon}";
-          format-muted = "󰝟";
-          format-icons.default = [ "󰕿" "󰖀" "󰕾" ];
-          on-click = "pavucontrol";
-          on-click-right = "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle";
-          on-scroll-up = "wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+";
-          on-scroll-down = "wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-";
+          format-icons = {
+            activated = "󰅶";
+            deactivated = "󰾪";
+          };
+          tooltip-format-activated = "Idle inhibitor: on";
+          tooltip-format-deactivated = "Idle inhibitor: off";
         };
 
         tray = {
-          spacing = 10;
+          spacing = 8;
         };
       };
     };
 
     style = ''
-      /* Reset */
       * {
-        border: none;
-        border-radius: 0;
         font-family: "JetBrainsMono Nerd Font";
+        font-weight: bold;
         font-size: 13px;
         min-height: 0;
-      }
-
-      button {
         border: none;
         border-radius: 0;
       }
 
       window#waybar {
+        background: transparent;
+      }
+
+      .modules-left,
+      .modules-center,
+      .modules-right {
         background-color: #1e1e2e;
-        color: #cdd6f4;
-      }
-
-      /* Pill base for all modules */
-      #clock,
-      #battery,
-      #pulseaudio,
-      #network,
-      #custom-sysmon,
-      #custom-bluetooth,
-      #tray {
-        background-color: #313244;
-        border-radius: 8px;
-        padding: 0 10px;
-        margin: 4px 2px;
-        transition: background-color 200ms ease;
-      }
-
-      #clock:hover,
-      #battery:hover,
-      #pulseaudio:hover,
-      #network:hover,
-      #custom-sysmon:hover,
-      #custom-bluetooth:hover,
-      #tray:hover {
-        background-color: #45475a;
-      }
-
-      /* Icon-only modules: fixed width */
-      #pulseaudio,
-      #network,
-      #custom-bluetooth {
-        padding: 0 8px;
-        min-width: 20px;
+        border: 1px solid #313244;
+        border-radius: 12px;
+        padding: 0 4px;
       }
 
       /* Workspaces */
       #workspaces button {
-        padding: 0 8px;
-        margin: 4px 2px;
         color: #585b70;
-        background: transparent;
+        padding: 0 6px;
+        margin: 4px 2px;
         border-radius: 8px;
-        transition: all 200ms ease;
+        transition: all 0.3s cubic-bezier(.55, -0.68, .48, 1.682);
+      }
+
+      #workspaces button.active {
+        padding: 0 12px;
       }
 
       #workspaces button:hover {
-        background-color: #45475a;
+        background-color: #313244;
         color: #cdd6f4;
       }
 
       /* 1-2: code/chat - blue */
       #workspaces button:nth-child(-n+2).active {
-        color: #1e1e2e;
-        background-color: #89b4fa;
+        color: #89b4fa;
       }
 
       /* 3-8: main work - mauve */
       #workspaces button:nth-child(n+3):nth-child(-n+8).active {
-        color: #1e1e2e;
-        background-color: #cba6f7;
+        color: #cba6f7;
       }
 
       /* 9-10: logs/misc - peach */
       #workspaces button:nth-child(n+9).active {
-        color: #1e1e2e;
-        background-color: #fab387;
+        color: #fab387;
+      }
+
+      /* Base module styling */
+      #clock,
+      #memory,
+      #temperature,
+      #language,
+      #network,
+      #custom-bluetooth,
+      #backlight,
+      #pulseaudio,
+      #battery,
+      #idle_inhibitor,
+      #tray {
+        padding: 0 8px;
+        margin: 4px 0;
       }
 
       /* Clock */
       #clock {
-        color: #cdd6f4;
-        font-weight: bold;
+        color: #f9e2af;
+      }
+
+      /* Memory */
+      #memory {
+        color: #89dceb;
+      }
+
+      /* Temperature */
+      #temperature {
+        color: #94e2d5;
+      }
+
+      #temperature.critical {
+        color: #f38ba8;
+      }
+
+      /* Language */
+      #language {
+        color: #f5c2e7;
+      }
+
+      /* Network */
+      #network {
+        color: #94e2d5;
+      }
+
+      #network.disconnected {
+        color: #585b70;
+      }
+
+      /* Bluetooth */
+      #custom-bluetooth {
+        color: #89b4fa;
+      }
+
+      #custom-bluetooth.off {
+        color: #585b70;
+      }
+
+      /* Backlight */
+      #backlight {
+        color: #fab387;
+      }
+
+      /* Audio */
+      #pulseaudio {
+        color: #74c7ec;
+      }
+
+      #pulseaudio.muted {
+        color: #585b70;
       }
 
       /* Battery */
       #battery {
-        color: #a6e3a1;
-      }
-
-      #battery.good {
         color: #a6e3a1;
       }
 
@@ -280,49 +311,30 @@ in
         }
       }
 
-      /* Audio */
-      #pulseaudio {
-        color: #89b4fa;
-      }
-
-      #pulseaudio.muted {
+      /* Idle inhibitor */
+      #idle_inhibitor {
         color: #585b70;
       }
 
-      /* Network */
-      #network {
-        color: #cba6f7;
-      }
-
-      #network.disconnected {
-        color: #585b70;
-      }
-
-      /* Bluetooth */
-      #custom-bluetooth {
-        color: #94e2d5;
-      }
-
-      #custom-bluetooth.off {
-        color: #585b70;
-      }
-
-      /* System monitor */
-      #custom-sysmon.cpu {
-        color: #fab387;
-      }
-
-      #custom-sysmon.ram {
-        color: #a6e3a1;
-      }
-
-      #custom-sysmon.temp {
+      #idle_inhibitor.activated {
         color: #f9e2af;
       }
 
       /* Tray */
       #tray {
         color: #cdd6f4;
+      }
+
+      /* Tooltip */
+      tooltip {
+        background-color: #1e1e2e;
+        border: 1px solid #313244;
+        border-radius: 10px;
+      }
+
+      tooltip label {
+        color: #cdd6f4;
+        padding: 4px;
       }
     '';
   };

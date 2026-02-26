@@ -49,6 +49,7 @@
     # Utilities
     pavucontrol
     libnotify
+    overskride
 
     # Media
     mpv
