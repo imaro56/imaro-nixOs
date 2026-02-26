@@ -165,7 +165,6 @@ in
       }
 
       button {
-        box-shadow: none;
         border: none;
         border-radius: 0;
       }
@@ -200,13 +199,12 @@ in
         background-color: #45475a;
       }
 
-      /* Icon-only modules: fixed width, centered */
+      /* Icon-only modules: fixed width */
       #pulseaudio,
       #network,
       #custom-bluetooth {
         padding: 0 8px;
         min-width: 20px;
-        text-align: center;
       }
 
       /* Workspaces */

@@ -169,7 +169,7 @@
 
         # Scratchpad (special workspace)
         "$mod, grave, togglespecialworkspace, scratchpad"
-        "$mod SHIFT, grave, movetoworkspace, special:scratchpad"
+        "$mod SHIFT, grave, movetoworkspacesilent, special:scratchpad"
 
         # Monitor focus (left / center / right)
         "$mod, comma, focusmonitor, eDP-2"
@@ -182,6 +182,9 @@
 
         # Lock
         "$mod, Escape, exec, hyprlock"
+
+        # Resize mode
+        "$mod, R, submap, resize"
 
         # Reload config
         "$mod SHIFT, R, exec, hyprctl reload"
@@ -219,6 +222,21 @@
         "swww img /home/imaro56/wallpaper.png"
       ];
     };
+
+    extraConfig = ''
+      submap = resize
+      binde = , H, resizeactive, -20 0
+      binde = , L, resizeactive, 20 0
+      binde = , K, resizeactive, 0 -20
+      binde = , J, resizeactive, 0 20
+      binde = , left, resizeactive, -20 0
+      binde = , right, resizeactive, 20 0
+      binde = , up, resizeactive, 0 -20
+      binde = , down, resizeactive, 0 20
+      bind = , escape, submap, reset
+      bind = , return, submap, reset
+      submap = reset
+    '';
   };
 
 }
