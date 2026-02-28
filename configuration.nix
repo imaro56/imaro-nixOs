@@ -5,6 +5,7 @@
     ./hardware-configuration.nix
     ./gnome.nix
     ./hyprland.nix
+    ./virtualization.nix
   ];
 
   # Nix
@@ -144,7 +145,7 @@
   security.sudo.wheelNeedsPassword = false;
 
   # Lid
-  services.logind.lidSwitch = "suspend";
+  services.logind.settings.Login.HandleLidSwitch = "suspend";
 
   # Display & Input
   services.xserver.enable = true;
