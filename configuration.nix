@@ -123,7 +123,7 @@
     };
   };
 
-  
+
 
   # Audio
   services.pulseaudio.enable = false;
@@ -139,7 +139,7 @@
   users.users.imaro56 = {
     isNormalUser = true;
     description = "imaro56";
-    extraGroups = [ "networkmanager" "wheel" "docker" ];
+    extraGroups = [ "networkmanager" "wheel" "docker" "libvirtd" ];
     shell = pkgs.fish;
   };
   security.sudo.wheelNeedsPassword = false;
