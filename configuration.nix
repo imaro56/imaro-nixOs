@@ -143,6 +143,9 @@
   };
   security.sudo.wheelNeedsPassword = false;
 
+  # Lid
+  services.logind.lidSwitch = "suspend";
+
   # Display & Input
   services.xserver.enable = true;
   services.displayManager.gdm.enable = true;

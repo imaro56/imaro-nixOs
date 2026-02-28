@@ -2,8 +2,25 @@
 
 let
   inherit (config.lib.formats.rasi) mkLiteral;
+
+  powerMenu = pkgs.writeShellScript "rofi-power-menu" ''
+    choice=$(printf "󰌾 Lock\n󰤄 Suspend\n󰍃 Logout\n󰜉 Reboot\n󰐥 Shutdown" | \
+      rofi -dmenu -p "Power" -theme-str 'window {width: 300px;} listview {lines: 5;}')
+
+    case "$choice" in
+      "󰌾 Lock")     hyprlock ;;
+      "󰤄 Suspend")  systemctl suspend ;;
+      "󰍃 Logout")   hyprctl dispatch exit ;;
+      "󰜉 Reboot")   systemctl reboot ;;
+      "󰐥 Shutdown") systemctl poweroff ;;
+    esac
+  '';
 in
 {
+  wayland.windowManager.hyprland.settings.bind = [
+    "SUPER SHIFT, Escape, exec, ${powerMenu}"
+  ];
+
   programs.rofi = {
     enable = true;
     package = pkgs.rofi;
