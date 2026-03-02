@@ -49,6 +49,7 @@
     pavucontrol
     libnotify
     overskride
+    keepassxc
 
     # Media
     mpv
