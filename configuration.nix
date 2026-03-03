@@ -3,7 +3,6 @@
 {
   imports = [
     ./hardware-configuration.nix
-    ./gnome.nix
     ./hyprland.nix
     ./virtualization.nix
   ];
@@ -98,6 +97,10 @@
     LC_TIME = "uk_UA.UTF-8";
   };
 
+  # Bluetooth
+  hardware.bluetooth.enable = true;
+  hardware.bluetooth.powerOnBoot = true;
+
   # Firmware
   hardware.enableRedistributableFirmware = true;
   services.fwupd.enable = true;
@@ -149,10 +152,18 @@
 
   # Display & Input
   services.xserver.enable = true;
-  services.displayManager.gdm.enable = true;
   services.xserver.xkb = {
     layout = "us,ua";
     options = "grp:caps_toggle";
+  };
+
+  # Greeter
+  services.greetd = {
+    enable = true;
+    settings.default_session = {
+      command = "${pkgs.tuigreet}/bin/tuigreet --time --remember --cmd Hyprland";
+      user = "greeter";
+    };
   };
 
   # Swap Escape and CapsLock at input level (before XKB)
@@ -178,6 +189,7 @@
   ];
 
   # Services
+  services.gvfs.enable = true;
   services.printing.enable = false;
   systemd.services.ModemManager.enable = false;
   programs.fish.enable = true;

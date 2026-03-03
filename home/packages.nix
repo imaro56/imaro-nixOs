@@ -34,12 +34,6 @@
     uv
     playwright-mcp
 
-    # GNOME extensions
-    gnomeExtensions.appindicator
-    gnomeExtensions.notification-timeout
-    gnomeExtensions.tiling-shell
-    gnomeExtensions.clipboard-history
-
     # Hyprland tools
     grimblast
     cliphist
@@ -47,6 +41,7 @@
     playerctl
     swww
     nautilus
+    networkmanager_dmenu
 
     # Utilities
     pavucontrol

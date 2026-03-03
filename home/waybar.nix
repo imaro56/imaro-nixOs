@@ -91,7 +91,7 @@ in
           tooltip-format-wifi = "{essid}\nSignal: {signalStrength}%\nIP: {ipaddr}";
           tooltip-format-ethernet = "{ifname}\nIP: {ipaddr}";
           tooltip-format-disconnected = "No connection";
-          on-click = "ghostty -e nmtui";
+          on-click = "networkmanager_dmenu";
         };
 
         "custom/bluetooth" = {
