@@ -22,11 +22,14 @@
     # Fonts
     nerd-fonts.jetbrains-mono
 
+    # Browsers
+    google-chrome
+
     # Office
     onlyoffice-desktopeditors
 
     # Claude Code
-    claude-code
+    inputs.claude-code.packages.${pkgs.stdenv.hostPlatform.system}.default
     nodejs
     uv
     playwright-mcp

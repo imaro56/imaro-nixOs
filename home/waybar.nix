@@ -48,7 +48,9 @@ in
         "hyprland/workspaces" = {
           format = "{id}";
           persistent-workspaces = {
-            "*" = 10;
+            "eDP-2" = [ 1 2 ];
+            "DP-3" = [ 3 4 5 6 7 8 ];
+            "DP-4" = [ 9 10 ];
           };
         };
 
@@ -59,7 +61,7 @@ in
         };
 
         memory = {
-          interval = 2;
+          interval = 5;
           format = "  {percentage}%";
           tooltip-format = "{used:0.1f}G / {total:0.1f}G";
           on-click = "ghostty -e btop";
@@ -68,7 +70,7 @@ in
         temperature = {
           hwmon-path-abs = "/sys/devices/pci0000:00/0000:00:18.3/hwmon";
           input-filename = "temp1_input";
-          interval = 2;
+          interval = 5;
           critical-threshold = 85;
           format = " {temperatureC}°C";
           format-critical = " {temperatureC}°C";
@@ -182,7 +184,7 @@ in
         padding: 0 6px;
         margin: 4px 2px;
         border-radius: 8px;
-        transition: all 0.3s cubic-bezier(.55, -0.68, .48, 1.682);
+        transition: color 0.2s ease, padding 0.2s ease;
       }
 
       #workspaces button.active {

@@ -13,6 +13,8 @@
       url = "github:0xc000022070/zen-browser-flake";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    claude-code.url = "github:ryoppippi/claude-code-overlay";
   };
 
   outputs = { self, nixpkgs, ... }@inputs: {

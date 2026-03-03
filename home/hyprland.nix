@@ -8,7 +8,7 @@
       monitor = [
         "eDP-2, 1920x1080@165, 0x0, 1"
         "DP-3, 1920x1080, 1920x0, 1"
-        "DP-4, 1920x1080, 3840x420, 1, transform, 1"
+        "DP-4, 1920x1080, 3840x-420, 1, transform, 1"
         ", preferred, auto, 1"
       ];
 
@@ -179,6 +179,9 @@
         # Screenshot
         ", Print, exec, grimblast --freeze copysave area ~/Pictures/Screenshots/$(date +'%Y-%m-%d_%H-%M-%S').png"
         "$mod, Print, exec, grimblast --freeze copysave screen ~/Pictures/Screenshots/$(date +'%Y-%m-%d_%H-%M-%S').png"
+        "$mod, P, exec, grimblast --freeze copysave area ~/Pictures/Screenshots/$(date +'%Y-%m-%d_%H-%M-%S').png"
+        "$mod SHIFT, P, exec, grimblast --freeze copysave screen ~/Pictures/Screenshots/$(date +'%Y-%m-%d_%H-%M-%S').png"
+        "$mod ALT, P, exec, grimblast --freeze copysave output ~/Pictures/Screenshots/$(date +'%Y-%m-%d_%H-%M-%S').png"
 
         # Lock
         "$mod, Escape, exec, hyprlock"
