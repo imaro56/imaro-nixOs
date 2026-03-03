@@ -41,6 +41,13 @@
     };
   };
 
+  xdg.configFile."networkmanager-dmenu/config.ini".text = ''
+    [dmenu]
+    dmenu_command = rofi -dmenu -i
+    [editor]
+    terminal = ghostty
+  '';
+
   programs.home-manager.enable = true;
 
   # Don't change this
