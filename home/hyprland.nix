@@ -91,7 +91,7 @@
         # Apps
         "$mod, Return, exec, ghostty"
         "$mod, D, exec, rofi -show drun -show-icons"
-        "$mod, E, exec, nautilus"
+        "$mod, E, exec, thunar"
         "$mod, B, exec, zen-beta"
 
         # Window management
@@ -216,6 +216,7 @@
       ];
 
       exec-once = [
+        "lxqt-policykit-agent"
         "waybar"
         "mako"
         "hypridle"

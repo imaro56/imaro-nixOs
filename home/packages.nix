@@ -40,10 +40,11 @@
     brightnessctl
     playerctl
     swww
-    nautilus
+    thunar
     networkmanager_dmenu
 
     # Utilities
+    lxqt.lxqt-policykit
     pavucontrol
     libnotify
     overskride
