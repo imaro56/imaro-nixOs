@@ -26,8 +26,9 @@ in
     fish = {
       enable = true;
       shellAliases = {
-        rebuild = "cd ~/nixos-config && git add . && nh os switch";
-        reboot = "cd ~/nixos-config && git add . && nh os boot && sudo reboot";
+        rebuild = "cd ~/nixos-config && git add . && nh os switch -H imaro56";
+        update = "cd ~/nixos-config && nix flake update && git add . && nh os switch -H imaro56";
+        reboot = "cd ~/nixos-config && git add . && nh os boot -H imaro56 && sudo reboot";
         conf = "cd ~/nixos-config && nvim .";
       };
       shellAbbrs = {

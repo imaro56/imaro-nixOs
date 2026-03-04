@@ -19,7 +19,10 @@
     };
   };
 
-  xdg.configFile."nvim".source = ./dotfiles/nvim;
+  xdg.configFile."nvim" = {
+    source = ./dotfiles/nvim;
+    recursive = true;
+  };
 
   # LazyVim runtime dependencies
   home.packages = with pkgs; [
