@@ -41,6 +41,8 @@
     playerctl
     swww
     thunar
+    thunar-volman
+    thunar-archive-plugin
     networkmanager_dmenu
 
     # Utilities

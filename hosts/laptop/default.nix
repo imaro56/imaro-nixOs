@@ -1,27 +1,16 @@
-{ config, pkgs, ... }:
+{ pkgs, ... }:
 
 {
   imports = [
     ./hardware-configuration.nix
-    ./hyprland.nix
-    ./virtualization.nix
+    ../../modules/nix.nix
+    ../../modules/nvidia.nix
+    ../../modules/audio.nix
+    ../../modules/networking.nix
+    ../../modules/hyprland.nix
+    ../../modules/virtualization.nix
+    ../../modules/gaming.nix
   ];
-
-  # Nix
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
-
-  # Nix cleanup
-  nix.gc = {
-    automatic = true;
-    dates = "weekly";
-    options = "--delete-older-than 14d";
-  };
-
-  nix.optimise = {
-    automatic = true;
-    dates = [ "weekly" ];
-  };
-
 
   # Boot
   boot.loader = {
@@ -60,27 +49,26 @@
   services.udev.extraRules = ''
     ACTION=="add|change", KERNEL=="nvme[0-9]*", ATTR{queue/scheduler}="none"
   '';
-  services.avahi.enable = false;
+
   boot.kernel.sysctl = {
     "vm.swappiness" = 10;
     "vm.dirty_writeback_centisecs" = 1500;
     "vm.vfs_cache_pressure" = 50;
-    "vm.page-cluster" = 0; # read single pages from zram (better for compressed swap)
-    "net.core.default_qdisc" = "cake"; # better network queuing
-    "net.ipv4.tcp_congestion_control" = "bbr"; # faster TCP
-    "kernel.nmi_watchdog" = 0; # save CPU cycles
+    "vm.page-cluster" = 0;
+    "net.core.default_qdisc" = "cake";
+    "net.ipv4.tcp_congestion_control" = "bbr";
+    "kernel.nmi_watchdog" = 0;
   };
 
-  # Zram (compressed RAM swap - same as Windows memory compression)
+  # Zram
   zramSwap = {
     enable = true;
     algorithm = "zstd";
     memoryPercent = 50;
   };
 
-  # Networking
-  networking.hostName = "nixos";
-  networking.networkmanager.enable = true;
+  # Hostname
+  networking.hostName = "imaro56";
 
   # Locale
   time.timeZone = "Europe/Kyiv";
@@ -97,46 +85,9 @@
     LC_TIME = "uk_UA.UTF-8";
   };
 
-  # Bluetooth
-  hardware.bluetooth.enable = true;
-  hardware.bluetooth.powerOnBoot = true;
-
   # Firmware
   hardware.enableRedistributableFirmware = true;
   services.fwupd.enable = true;
-
-  # Graphics (NVIDIA PRIME Offload - AMD iGPU primary, NVIDIA dGPU on demand)
-  services.xserver.videoDrivers = [ "nvidia" ];
-  hardware.graphics.enable = true;
-  hardware.graphics.enable32Bit = true;
-  hardware.nvidia = {
-    modesetting.enable = true;
-    open = false;
-    nvidiaSettings = true;
-    package = config.boot.kernelPackages.nvidiaPackages.stable;
-    powerManagement.enable = true;
-    powerManagement.finegrained = false;
-    prime = {
-      offload = {
-        enable = true;
-        enableOffloadCmd = true;
-      };
-      amdgpuBusId = "PCI:6:0:0";
-      nvidiaBusId = "PCI:1:0:0";
-    };
-  };
-
-
-
-  # Audio
-  services.pulseaudio.enable = false;
-  security.rtkit.enable = true;
-  services.pipewire = {
-    enable = true;
-    alsa.enable = true;
-    alsa.support32Bit = true;
-    pulse.enable = true;
-  };
 
   # Users
   users.users.imaro56 = {
@@ -178,14 +129,11 @@
     };
   };
 
-  # Wayland
-  environment.sessionVariables.NIXOS_OZONE_WL = "1";
-
   # System Packages
   nixpkgs.config.allowUnfree = true;
   environment.systemPackages = with pkgs; [
-    jq # json processor
-    wl-clipboard # clipboard
+    jq
+    wl-clipboard
   ];
 
   # Services
@@ -193,12 +141,6 @@
   services.printing.enable = false;
   systemd.services.ModemManager.enable = false;
   programs.fish.enable = true;
-  programs.steam = {
-    enable = true;
-    remotePlay.openFirewall = true;
-  };
-  virtualisation.docker.enable = true;
-  virtualisation.docker.enableOnBoot = false;
   programs.nix-ld.enable = true;
   programs.nh = {
     enable = true;

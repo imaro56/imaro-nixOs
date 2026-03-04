@@ -1,14 +1,13 @@
-{ inputs, pkgs, lib, ... }:
+{ pkgs, lib, ... }:
 
 {
   imports = [
     ./shell.nix
-    ./kitty.nix
     ./ghostty.nix
     ./editors.nix
     ./git.nix
     ./packages.nix
-    ./gnome.nix
+    ./gtk.nix
     ./hyprland.nix
     ./waybar.nix
     ./rofi.nix
@@ -20,14 +19,6 @@
   home.username = "imaro56";
   home.homeDirectory = "/home/imaro56";
 
-  home.pointerCursor = {
-    name = "Adwaita";
-    package = pkgs.adwaita-icon-theme;
-    size = 24;
-    gtk.enable = true;
-    x11.enable = true;
-  };
-
   xdg.portal = {
     enable = lib.mkForce true;
     extraPortals = [
@@ -37,7 +28,6 @@
     config = {
       common.default = [ "gtk" ];
       hyprland.default = [ "hyprland" "gtk" ];
-      gnome.default = [ "gnome" "gtk" ];
     };
   };
 

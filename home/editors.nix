@@ -6,7 +6,7 @@
       enable = true;
       defaultEditor = true;
       vimAlias = true;
-      # No extraConfig - LazyVim manages everything via ~/.config/nvim
+      # LazyVim config is symlinked from ./dotfiles/nvim
     };
 
     # Zed - fast GPU-accelerated editor
@@ -18,6 +18,8 @@
       ];
     };
   };
+
+  xdg.configFile."nvim".source = ./dotfiles/nvim;
 
   # LazyVim runtime dependencies
   home.packages = with pkgs; [

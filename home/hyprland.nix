@@ -67,24 +67,28 @@
 
       workspace = [
         # Left monitor (eDP-2) — comms & reference
-        "1, monitor:eDP-2, default:true"
-        "2, monitor:eDP-2"
+        "1, monitor:eDP-2, default:true, persistent:true"
+        "2, monitor:eDP-2, persistent:true"
         # Center monitor (DP-3) — main work
-        "3, monitor:DP-3, default:true"
-        "4, monitor:DP-3"
-        "5, monitor:DP-3"
-        "6, monitor:DP-3"
-        "7, monitor:DP-3"
-        "8, monitor:DP-3"
+        "3, monitor:DP-3, default:true, persistent:true"
+        "4, monitor:DP-3, persistent:true"
+        "5, monitor:DP-3, persistent:true"
+        "6, monitor:DP-3, persistent:true"
+        "7, monitor:DP-3, persistent:true"
+        "8, monitor:DP-3, persistent:true"
         # Right monitor (DP-4) — logs & docs (portrait)
-        "9, monitor:DP-4, default:true"
-        "10, monitor:DP-4"
+        "9, monitor:DP-4, default:true, persistent:true"
+        "10, monitor:DP-4, persistent:true"
       ];
 
       env = [
         "XCURSOR_SIZE,24"
         "QT_QPA_PLATFORM,wayland"
         "QT_WAYLAND_DISABLE_WINDOWDECORATION,1"
+        "LIBVA_DRIVER_NAME,nvidia"
+        "GBM_BACKEND,nvidia-drm"
+        "__GLX_VENDOR_LIBRARY_NAME,nvidia"
+        "NVD_BACKEND,direct"
       ];
 
       bind = [
