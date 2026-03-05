@@ -47,6 +47,7 @@ in
 
         "hyprland/workspaces" = {
           format = "{id}";
+          all-outputs = false;
           persistent-workspaces = {
             "eDP-2" = [ 1 2 ];
             "DP-3" = [ 3 4 5 6 7 8 ];
