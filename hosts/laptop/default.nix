@@ -41,7 +41,11 @@
     };
   };
 
-  boot.kernelParams = [ "nvidia.NVreg_PreserveVideoMemoryAllocations=1" ];
+  boot.kernelParams = [
+    "nvidia.NVreg_PreserveVideoMemoryAllocations=1"
+    "nvme_core.default_ps_max_latency_us=0"
+    "amdgpu.dcdebugmask=0x10"
+  ];
 
   # SSD (Samsung 990 Pro NVMe)
   fileSystems."/".options = [ "noatime" ];
@@ -112,7 +116,7 @@
   services.greetd = {
     enable = true;
     settings.default_session = {
-      command = "${pkgs.tuigreet}/bin/tuigreet --time --remember --cmd Hyprland";
+      command = "${pkgs.tuigreet}/bin/tuigreet --time --remember --cmd start-hyprland";
       user = "greeter";
     };
   };

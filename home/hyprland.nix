@@ -65,6 +65,11 @@
         disable_splash_rendering = true;
       };
 
+      ecosystem = {
+        no_update_news = true;
+        no_donation_nag = true;
+      };
+
       workspace = [
         # Left monitor (eDP-2) — comms & reference
         "1, monitor:eDP-2, default:true, persistent:true"
