@@ -57,6 +57,9 @@
 
     # Notes
     obsidian
+
+    # Productivity
+    super-productivity
   ] ++ [
     # External flake packages
     inputs.zen-browser.packages."${pkgs.stdenv.hostPlatform.system}".default
