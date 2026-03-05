@@ -11,6 +11,7 @@
     ./hyprland.nix
     ./waybar.nix
     ./rofi.nix
+    ./rofi-projects.nix
     ./mako.nix
     ./hyprlock.nix
     ./hypridle.nix
