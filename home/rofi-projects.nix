@@ -8,10 +8,10 @@ let
 
   mdbDir = "/home/imaro56/work/code/MDB";
 
-  # Helper: close all windows matching a hyprland window class
-  closeByClass = class: ''
+  # Helper: close all windows on a workspace
+  closeWorkspace = ws: ''
     hyprctl clients -j | \
-      ${jq} -r '.[] | select(.class == "${class}") | .address' | \
+      ${jq} -r '.[] | select(.workspace.id == ${toString ws}) | .address' | \
       while read -r addr; do
         hyprctl dispatch closewindow "address:$addr"
       done
@@ -25,9 +25,9 @@ let
   '';
 
   killWork = pkgs.writeShellScript "kill-work" ''
-    ${closeByClass "dev.zed.Zed"}
-    ${closeByClass "Slack"}
-    ${closeByClass "zen-beta"}
+    ${closeWorkspace 1}
+    ${closeWorkspace 2}
+    ${closeWorkspace 4}
   '';
 
   launchCsbok = pkgs.writeShellScript "launch-csbok" ''
@@ -40,17 +40,15 @@ let
     # Start project docker services
     docker compose -f "${csbokDir}/docker-compose.yml" up -d
 
-    hyprctl dispatch exec "[workspace 3 silent]" "ghostty --class=ghostty-claude -e bash -c \"cd '${csbokDir}' && claude\""
-    hyprctl dispatch exec "[workspace 9 silent]" "ghostty --class=ghostty-csbok --working-directory=${csbokAppDir} -e fish -c 'python manage.py runserver'"
-    hyprctl dispatch exec "[workspace 9 silent]" "ghostty --class=ghostty-csbok --working-directory=${csbokAppDir}"
+    hyprctl dispatch exec "[workspace 3 silent]" "ghostty -e bash -c \"cd '${csbokDir}' && claude\""
+    hyprctl dispatch exec "[workspace 9 silent]" "ghostty --working-directory=${csbokAppDir} -e fish -c 'python manage.py runserver'"
+    hyprctl dispatch exec "[workspace 9 silent]" "ghostty --working-directory=${csbokAppDir}"
     hyprctl dispatch workspace 3
   '';
 
   killCsbok = pkgs.writeShellScript "kill-csbok" ''
-    ${closeByClass "ghostty-claude"}
-    ${closeByClass "ghostty-csbok"}
-
-    # Stop project docker services
+    ${closeWorkspace 3}
+    ${closeWorkspace 9}
     docker compose -f "${csbokDir}/docker-compose.yml" down
   '';
 
@@ -64,18 +62,16 @@ let
     # Start project docker services
     docker compose -f "${mdbDir}/docker-compose.yml" up -d
 
-    hyprctl dispatch exec "[workspace 3 silent]" "ghostty --class=ghostty-claude -e bash -c \"cd '${mdbDir}' && claude\""
-    hyprctl dispatch exec "[workspace 9 silent]" "ghostty --class=ghostty-mdb --working-directory=${mdbDir} -e fish -c 'python manage.py runserver'"
-    hyprctl dispatch exec "[workspace 9 silent]" "ghostty --class=ghostty-mdb --working-directory=${mdbDir}/frontend -e fish -c 'npm run dev'"
-    hyprctl dispatch exec "[workspace 9 silent]" "ghostty --class=ghostty-mdb --working-directory=${mdbDir}"
+    hyprctl dispatch exec "[workspace 3 silent]" "ghostty -e bash -c \"cd '${mdbDir}' && claude\""
+    hyprctl dispatch exec "[workspace 9 silent]" "ghostty --working-directory=${mdbDir} -e fish -c 'python manage.py runserver'"
+    hyprctl dispatch exec "[workspace 9 silent]" "ghostty --working-directory=${mdbDir}/frontend -e fish -c 'npm run dev'"
+    hyprctl dispatch exec "[workspace 9 silent]" "ghostty --working-directory=${mdbDir}"
     hyprctl dispatch workspace 3
   '';
 
   killMdb = pkgs.writeShellScript "kill-mdb" ''
-    ${closeByClass "ghostty-claude"}
-    ${closeByClass "ghostty-mdb"}
-
-    # Stop project docker services
+    ${closeWorkspace 3}
+    ${closeWorkspace 9}
     docker compose -f "${mdbDir}/docker-compose.yml" down
   '';
 

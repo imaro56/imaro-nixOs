@@ -46,11 +46,15 @@ in
 
         # uair pomodoro
         ut = "uairctl toggle";
+        up = "uairctl pause";
+        ur = "uairctl resume";
         un = "uairctl next";
-        up = "uairctl prev";
+        upr = "uairctl prev";
         uf = "uairctl finish";
         uj = "uairctl jump";
-        ur = "uairctl reload";
+        url = "uairctl reload";
+        ufe = "uairctl fetch";
+        ul = "uairctl listen";
       };
       shellAbbrs = {
         "--help" = {
