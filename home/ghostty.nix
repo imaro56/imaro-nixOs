@@ -1,7 +1,8 @@
 { ... }:
 
 {
-  xdg.configFile."ghostty/shaders/cursor_tail.glsl".text = builtins.readFile ./shaders/cursor_tail.glsl;
+  xdg.configFile."ghostty/shaders/cursor_tail.glsl".text =
+    builtins.readFile ./shaders/cursor_tail.glsl;
 
   programs.ghostty = {
     enable = true;
@@ -14,7 +15,10 @@
       # -- Font --
       font-family = "JetBrainsMono Nerd Font";
       font-size = 14;
-      font-feature = [ "+liga" "+calt" ];
+      font-feature = [
+        "+liga"
+        "+calt"
+      ];
       font-synthetic-style = false;
 
       # -- Window --
@@ -61,7 +65,7 @@
 
       # -- Misc --
       confirm-close-surface = false;
-      scrollback-limit = 10000;
+      scrollback-limit = 10000000;
       link-url = true;
       minimum-contrast = 1.0;
 
