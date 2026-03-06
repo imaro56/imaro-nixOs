@@ -8,6 +8,7 @@
       PartOf = [ "graphical-session.target" ];
     };
     Service = {
+      ExecStartPre = "${pkgs.coreutils}/bin/rm -f %t/uair.sock";
       ExecStart = "${pkgs.uair}/bin/uair";
       Restart = "on-failure";
       RestartSec = 5;
