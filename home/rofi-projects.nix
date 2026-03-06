@@ -6,6 +6,8 @@ let
   csbokDir = "/home/imaro56/work/code/CSBOK";
   csbokAppDir = "${csbokDir}/csbok";
 
+  mdbDir = "/home/imaro56/work/code/MDB";
+
   # Helper: close all windows matching a hyprland window class
   closeByClass = class: ''
     hyprctl clients -j | \
@@ -52,6 +54,31 @@ let
     docker compose -f "${csbokDir}/docker-compose.yml" down
   '';
 
+  launchMdb = pkgs.writeShellScript "launch-mdb" ''
+    # Stop all running docker containers
+    running=$(docker ps -q)
+    if [ -n "$running" ]; then
+      docker stop $running
+    fi
+
+    # Start project docker services
+    docker compose -f "${mdbDir}/docker-compose.yml" up -d
+
+    hyprctl dispatch exec "[workspace 3 silent]" "ghostty --class=ghostty-claude -e bash -c \"cd '${mdbDir}' && claude\""
+    hyprctl dispatch exec "[workspace 9 silent]" "ghostty --class=ghostty-mdb --working-directory=${mdbDir} -e fish -c 'python manage.py runserver'"
+    hyprctl dispatch exec "[workspace 9 silent]" "ghostty --class=ghostty-mdb --working-directory=${mdbDir}/frontend -e fish -c 'npm run dev'"
+    hyprctl dispatch exec "[workspace 9 silent]" "ghostty --class=ghostty-mdb --working-directory=${mdbDir}"
+    hyprctl dispatch workspace 3
+  '';
+
+  killMdb = pkgs.writeShellScript "kill-mdb" ''
+    ${closeByClass "ghostty-claude"}
+    ${closeByClass "ghostty-mdb"}
+
+    # Stop project docker services
+    docker compose -f "${mdbDir}/docker-compose.yml" down
+  '';
+
   projectsScript = pkgs.writeShellScript "rofi-projects-mode" ''
     if [ "$ROFI_RETV" -eq 0 ]; then
       echo -en "\0prompt\x1fProject\n"
@@ -68,7 +95,8 @@ let
         work-kill)  coproc ( ${killWork} & ) ;;
         csbok-run)  coproc ( ${launchCsbok} & ) ;;
         csbok-kill) coproc ( ${killCsbok} & ) ;;
-        mdb-*)      coproc ( notify-send "MDB" "Not configured yet" & ) ;;
+        mdb-run)    coproc ( ${launchMdb} & ) ;;
+        mdb-kill)   coproc ( ${killMdb} & ) ;;
       esac
     fi
   '';
