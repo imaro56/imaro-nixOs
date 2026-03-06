@@ -15,6 +15,7 @@
     ./mako.nix
     ./hyprlock.nix
     ./hypridle.nix
+    ./uair.nix
   ];
 
   home.username = "imaro56";

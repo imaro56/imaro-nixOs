@@ -34,6 +34,7 @@ in
         modules-center = [ "clock" ];
         modules-right = [
           "tray"
+          "custom/uair"
           "idle_inhibitor"
           "memory"
           "temperature"
@@ -150,6 +151,16 @@ in
           tooltip-format-deactivated = "Idle inhibitor: off";
         };
 
+        "custom/uair" = {
+          exec = "uairctl fetch '{\"text\":\"󱎫 {name} {time}\",\"class\":\"{state}\",\"percentage\":{percent}}'";
+          return-type = "json";
+          interval = 1;
+          tooltip = false;
+          on-click = "uairctl toggle";
+          on-click-middle = "uairctl prev";
+          on-click-right = "uairctl next";
+        };
+
         tray = {
           spacing = 8;
         };
@@ -219,6 +230,7 @@ in
       #language,
       #network,
       #custom-bluetooth,
+      #custom-uair,
       #backlight,
       #wireplumber,
       #battery,
@@ -312,6 +324,15 @@ in
           color: #1e1e2e;
           background-color: #f38ba8;
         }
+      }
+
+      /* Pomodoro timer */
+      #custom-uair {
+        color: #585b70;
+      }
+
+      #custom-uair.resumed {
+        color: #f38ba8;
       }
 
       /* Idle inhibitor */

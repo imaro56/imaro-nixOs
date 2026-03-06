@@ -30,6 +30,27 @@ in
         update = "cd ~/nixos-config && nix flake update && git add . && nh os switch -H imaro56";
         reboot = "cd ~/nixos-config && git add . && nh os boot -H imaro56 && sudo reboot";
         conf = "cd ~/nixos-config && nvim .";
+
+        # Watson time tracking
+        ws = "watson start";
+        wst = "watson stop";
+        wr = "watson restart";
+        wc = "watson cancel";
+        ww = "watson status";
+        wl = "watson log -d";
+        wlw = "watson log -w";
+        wrp = "watson report -w";
+        wp = "watson projects";
+        wt = "watson tags";
+        we = "watson edit";
+
+        # uair pomodoro
+        ut = "uairctl toggle";
+        un = "uairctl next";
+        up = "uairctl prev";
+        uf = "uairctl finish";
+        uj = "uairctl jump";
+        ur = "uairctl reload";
       };
       shellAbbrs = {
         "--help" = {

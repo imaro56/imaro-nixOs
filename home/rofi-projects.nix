@@ -39,7 +39,7 @@ let
     docker compose -f "${csbokDir}/docker-compose.yml" up -d
 
     hyprctl dispatch exec "[workspace 3 silent]" "ghostty --class=ghostty-claude -e bash -c \"cd '${csbokDir}' && claude\""
-    hyprctl dispatch exec "[workspace 9 silent]" "ghostty --class=ghostty-csbok --working-directory=${csbokAppDir} -e python manage.py runserver"
+    hyprctl dispatch exec "[workspace 9 silent]" "ghostty --class=ghostty-csbok --working-directory=${csbokAppDir} -e fish -c 'python manage.py runserver'"
     hyprctl dispatch exec "[workspace 9 silent]" "ghostty --class=ghostty-csbok --working-directory=${csbokAppDir}"
     hyprctl dispatch workspace 3
   '';
