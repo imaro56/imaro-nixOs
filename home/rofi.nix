@@ -18,7 +18,8 @@ let
 in
 {
   wayland.windowManager.hyprland.settings.bind = [
-    "SUPER SHIFT, Escape, exec, ${powerMenu}"
+    "SUPER, Escape, exec, ${powerMenu}"
+    "SUPER SHIFT, Escape, exec, hyprlock"
   ];
 
   programs.rofi = {

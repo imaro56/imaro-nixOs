@@ -192,8 +192,6 @@
         "$mod SHIFT, P, exec, grimblast --freeze copysave screen ~/Pictures/Screenshots/$(date +'%Y-%m-%d_%H-%M-%S').png"
         "$mod ALT, P, exec, grimblast --freeze copysave output ~/Pictures/Screenshots/$(date +'%Y-%m-%d_%H-%M-%S').png"
 
-        # Lock
-        "$mod, Escape, exec, hyprlock"
 
         # Resize mode
         "$mod, R, submap, resize"

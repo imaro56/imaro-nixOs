@@ -10,7 +10,7 @@
     Service = {
       ExecStartPre = "${pkgs.coreutils}/bin/rm -f %t/uair.sock";
       ExecStart = "${pkgs.uair}/bin/uair";
-      Restart = "on-failure";
+      Restart = "always";
       RestartSec = 5;
     };
     Install.WantedBy = [ "graphical-session.target" ];
