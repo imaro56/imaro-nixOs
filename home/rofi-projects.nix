@@ -16,21 +16,9 @@ let
   '';
 
   launchWork = pkgs.writeShellScript "launch-work" ''
-    # Workspace 1: Zed
-    hyprctl dispatch workspace 1
-    zeditor &
-    sleep 0.3
-
-    # Workspace 2: Slack
-    hyprctl dispatch workspace 2
-    slack &
-    sleep 0.3
-
-    # Workspace 4: Zen browser
-    hyprctl dispatch workspace 4
-    zen-beta &
-    sleep 0.3
-
+    hyprctl dispatch exec "[workspace 1 silent]" zeditor
+    hyprctl dispatch exec "[workspace 2 silent]" slack
+    hyprctl dispatch exec "[workspace 4 silent]" zen-beta
     hyprctl dispatch workspace 1
   '';
 
@@ -50,24 +38,15 @@ let
     # Start project docker services
     docker compose -f "${csbokDir}/docker-compose.yml" up -d
 
-    # Workspace 3: Claude Code in project dir
-    hyprctl dispatch workspace 3
-    ghostty -e bash -c "cd '${csbokDir}' && claude" &
-    sleep 0.4
-
-    # Workspace 9: two terminals in csbok/csbok
-    hyprctl dispatch workspace 9
-    ghostty --working-directory="${csbokAppDir}" &
-    sleep 0.4
-    ghostty --working-directory="${csbokAppDir}" &
-    sleep 0.4
-
-    # Focus workspace 3 (main work)
+    hyprctl dispatch exec "[workspace 3 silent]" "ghostty --class=ghostty-claude -e bash -c \"cd '${csbokDir}' && claude\""
+    hyprctl dispatch exec "[workspace 9 silent]" "ghostty --class=ghostty-csbok --working-directory=${csbokAppDir} -e python manage.py runserver"
+    hyprctl dispatch exec "[workspace 9 silent]" "ghostty --class=ghostty-csbok --working-directory=${csbokAppDir}"
     hyprctl dispatch workspace 3
   '';
 
   killCsbok = pkgs.writeShellScript "kill-csbok" ''
-    ${closeByClass "com.mitchellh.ghostty"}
+    ${closeByClass "ghostty-claude"}
+    ${closeByClass "ghostty-csbok"}
 
     # Stop project docker services
     docker compose -f "${csbokDir}/docker-compose.yml" down
