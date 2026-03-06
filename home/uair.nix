@@ -1,6 +1,20 @@
-{ ... }:
+{ pkgs, ... }:
 
 {
+  systemd.user.services.uair = {
+    Unit = {
+      Description = "uair pomodoro timer daemon";
+      After = [ "graphical-session.target" ];
+      PartOf = [ "graphical-session.target" ];
+    };
+    Service = {
+      ExecStart = "${pkgs.uair}/bin/uair";
+      Restart = "on-failure";
+      RestartSec = 5;
+    };
+    Install.WantedBy = [ "graphical-session.target" ];
+  };
+
   xdg.configFile."uair/uair.toml".text = ''
     [defaults]
     format = "{time}\n"
