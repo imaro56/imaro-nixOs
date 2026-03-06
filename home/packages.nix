@@ -58,8 +58,9 @@
     # Notes
     obsidian
 
-    # Productivity
-    super-productivity
+    # Time tracking
+    watson
+    uair
   ] ++ [
     # External flake packages
     inputs.zen-browser.packages."${pkgs.stdenv.hostPlatform.system}".default

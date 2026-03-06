@@ -41,7 +41,7 @@ in
           "network"
           "custom/bluetooth"
           "backlight"
-          "pulseaudio"
+          "wireplumber"
           "battery"
         ];
 
@@ -110,10 +110,10 @@ in
           on-scroll-down = "brightnessctl set 5%-";
         };
 
-        pulseaudio = {
+        wireplumber = {
           format = "{icon} {volume}%";
           format-muted = "󰝟 {volume}%";
-          format-icons.default = [ "󰕿" "󰖀" "󰕾" ];
+          format-icons = [ "󰕿" "󰖀" "󰕾" ];
           on-click = "pavucontrol";
           on-click-right = "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle";
           on-scroll-up = "wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+";
@@ -220,7 +220,7 @@ in
       #network,
       #custom-bluetooth,
       #backlight,
-      #pulseaudio,
+      #wireplumber,
       #battery,
       #idle_inhibitor,
       #tray {
@@ -276,11 +276,11 @@ in
       }
 
       /* Audio */
-      #pulseaudio {
+      #wireplumber {
         color: #74c7ec;
       }
 
-      #pulseaudio.muted {
+      #wireplumber.muted {
         color: #585b70;
       }
 
