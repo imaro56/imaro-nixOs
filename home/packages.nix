@@ -23,7 +23,10 @@
     nerd-fonts.jetbrains-mono
 
     # Browsers
-    google-chrome
+    brave
+    librewolf
+    firefox-devedition
+    tor-browser
 
     # Office
     onlyoffice-desktopeditors
