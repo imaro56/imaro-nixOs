@@ -31,18 +31,18 @@ in
         reboot = "cd ~/nixos-config && git add . && nh os boot -H imaro56 && sudo reboot";
         conf = "cd ~/nixos-config && nvim .";
 
-        # Watson time tracking
-        ws = "watson start";
-        wst = "watson stop";
-        wr = "watson restart";
-        wc = "watson cancel";
-        ww = "watson status";
-        wl = "watson log -d";
-        wlw = "watson log -w";
-        wrp = "watson report -w";
-        wp = "watson projects";
-        wt = "watson tags";
-        we = "watson edit";
+        # Toggl time tracking
+        ts = "toggl start";
+        tst = "toggl stop";
+        tc = "toggl continue";
+        tw = "toggl now";
+        tl = "toggl ls";
+        ta = "toggl add";
+        trm = "toggl rm";
+        tsu = "toggl sum";
+        tp = "toggl projects ls";
+        tt = "toggl tags ls";
+        tww = "toggl www";
 
         # uair pomodoro
         ut = "uairctl toggle";

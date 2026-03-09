@@ -27,7 +27,7 @@
     id = "work"
     name = "Work"
     duration = "50m"
-    command = "notify-send 'uair' 'Take a break!' && watson stop"
+    command = "notify-send 'uair' 'Take a break!' && toggl stop"
     autostart = false
 
     [[sessions]]

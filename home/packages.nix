@@ -59,7 +59,7 @@
     obsidian
 
     # Time tracking
-    watson
+    python313Packages.toggl-cli
     uair
   ] ++ [
     # External flake packages
