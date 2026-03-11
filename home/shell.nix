@@ -55,6 +55,12 @@ in
         url = "uairctl reload";
         ufe = "uairctl fetch";
         ul = "uairctl listen";
+        
+        # python
+        pm = "python manage.py";
+        pmr = "python manage.py runserver";
+        pmmk = "python manage.py makemigrations";
+        pmm = "python manage.py migrate";
       };
       shellAbbrs = {
         "--help" = {
@@ -120,8 +126,8 @@ in
         format = "$directory$shell$all$fill$line_break$character";
 
         character = {
-          success_symbol = "[✿](bold teal)";
-          error_symbol = "[✿](red)";
+          success_symbol = "[>](bold teal)";
+          error_symbol = "[>](red)";
           vimcmd_symbol = "[${nf.vim} ](bold rosewater)";
         };
 
