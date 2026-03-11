@@ -101,7 +101,6 @@
         "$mod, Return, exec, ghostty"
         "$mod, D, exec, rofi -show drun -show-icons"
         "$mod, E, exec, thunar"
-        "$mod, B, exec, zen-beta"
 
         # Window management
         "$mod, W, killactive"

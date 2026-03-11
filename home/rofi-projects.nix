@@ -20,7 +20,6 @@ let
   launchWork = pkgs.writeShellScript "launch-work" ''
     hyprctl dispatch exec "[workspace 1 silent]" zeditor
     hyprctl dispatch exec "[workspace 2 silent]" slack
-    hyprctl dispatch exec "[workspace 4 silent]" zen-beta
     hyprctl dispatch workspace 1
   '';
 

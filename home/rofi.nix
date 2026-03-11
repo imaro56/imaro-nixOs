@@ -2,23 +2,9 @@
 
 let
   inherit (config.lib.formats.rasi) mkLiteral;
-
-  powerMenu = pkgs.writeShellScript "rofi-power-menu" ''
-    choice=$(printf "󰌾 Lock\n󰤄 Suspend\n󰍃 Logout\n󰜉 Reboot\n󰐥 Shutdown" | \
-      rofi -dmenu -p "Power" -theme-str 'window {width: 300px;} listview {lines: 5;}')
-
-    case "$choice" in
-      "󰌾 Lock")     hyprlock ;;
-      "󰤄 Suspend")  systemctl suspend ;;
-      "󰍃 Logout")   hyprctl dispatch exit ;;
-      "󰜉 Reboot")   systemctl reboot ;;
-      "󰐥 Shutdown") systemctl poweroff ;;
-    esac
-  '';
 in
 {
   wayland.windowManager.hyprland.settings.bind = [
-    "SUPER, Escape, exec, ${powerMenu}"
     "SUPER SHIFT, Escape, exec, hyprlock"
   ];
 
@@ -32,6 +18,7 @@ in
     extraConfig = {
       modi = "drun,run,calc,emoji";
       show-icons = true;
+      icon-theme = "Papirus-Dark";
       display-drun = "Apps";
       display-run = "Run";
       display-calc = "Calc";
@@ -78,6 +65,8 @@ in
         padding = mkLiteral "12px";
         background-color = mkLiteral bg;
         spacing = mkLiteral "8px";
+        border = mkLiteral "0 0 2px 0";
+        border-color = mkLiteral surface0;
       };
 
       prompt = {
@@ -113,14 +102,18 @@ in
       "element selected" = {
         background-color = mkLiteral surface0;
         text-color = mkLiteral blue;
+        border = mkLiteral "0 0 0 3px";
+        border-color = mkLiteral blue;
       };
 
       element-icon = {
-        size = mkLiteral "24px";
+        size = mkLiteral "28px";
+        vertical-align = mkLiteral "0.5";
       };
 
       element-text = {
         highlight = mkLiteral "bold ${blue}";
+        vertical-align = mkLiteral "0.5";
       };
 
       "mode-switcher" = {

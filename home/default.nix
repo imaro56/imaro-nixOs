@@ -12,6 +12,7 @@
     ./waybar.nix
     ./rofi.nix
     ./rofi-projects.nix
+    ./rofi-menus.nix
     ./mako.nix
     ./hyprlock.nix
     ./hypridle.nix
