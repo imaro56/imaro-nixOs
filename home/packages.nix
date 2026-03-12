@@ -79,7 +79,7 @@
       obsidian
 
       # Time tracking
-      python313Packages.toggl-cli
+      clockify # time tracking GUI
       uair # pomodoro timer
 
       # Proton
@@ -92,8 +92,8 @@
       thunderbird
 
       # Google alternatives
-      freetube # private YouTube client
-      spotube # Spotify client without premium
+      freetube # YouTube client
+      youtube-music # YouTube Music desktop client
 
       # Password manager
       keepassxc # offline password manager with autotype

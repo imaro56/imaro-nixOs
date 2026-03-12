@@ -32,7 +32,7 @@ let
     case "$chosen" in
       s*) slack ;;
       d*) discord ;;
-      t*) telegram-desktop ;;
+      t*) Telegram ;;
     esac
   '';
 
@@ -64,13 +64,13 @@ let
   '';
 
   mediaMenu = pkgs.writeShellScript "rofi-media" ''
-    chosen=$(echo -en "m  MPV\0icon\x1fmpv\ny  FreeTube\0icon\x1ffreetube\ns  Spotube\0icon\x1fspotube" | \
+    chosen=$(echo -en "m  MPV\0icon\x1fmpv\nf  FreeTube\0icon\x1ffreetube\ny  YouTube Music\0icon\x1fyoutube-music" | \
       rofi -dmenu -auto-select -i -matching prefix -show-icons \
         ${menuTheme "Select Media" 3})
     case "$chosen" in
       m*) mpv ;;
-      y*) freetube ;;
-      s*) spotube ;;
+      f*) freetube ;;
+      y*) pear-desktop ;;
     esac
   '';
 in
