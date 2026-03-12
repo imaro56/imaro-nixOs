@@ -22,8 +22,6 @@
       lsof # list open files and ports
       bat # cat with syntax highlighting
       eza # modern ls replacement
-      fzf # fuzzy finder
-      zoxide # smarter cd that learns your directories
       lazygit # git TUI
       fd # fast find replacement
       tldr # simplified man pages with examples
@@ -79,7 +77,7 @@
       obsidian
 
       # Time tracking
-      clockify # time tracking GUI
+      watson # watson tracker cli
       uair # pomodoro timer
 
       # Proton
@@ -93,7 +91,7 @@
 
       # Google alternatives
       freetube # YouTube client
-      youtube-music # YouTube Music desktop client
+      pear-desktop # YouTube Music desktop client
 
       # Password manager
       keepassxc # offline password manager with autotype

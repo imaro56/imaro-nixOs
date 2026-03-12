@@ -31,18 +31,25 @@ in
         reboot = "cd ~/nixos-config && git add . && nh os boot -H imaro56 && sudo reboot";
         conf = "cd ~/nixos-config && nvim .";
 
-        # Toggl time tracking
-        ts = "toggl start";
-        tst = "toggl stop";
-        tc = "toggl continue";
-        tw = "toggl now";
-        tl = "toggl ls";
-        ta = "toggl add";
-        trm = "toggl rm";
-        tsu = "toggl sum";
-        tp = "toggl projects ls";
-        tt = "toggl tags ls";
-        tww = "toggl www";
+        # Watson time tracking
+        ws = "watson start";
+        wst = "watson stop";
+        wr = "watson restart";
+        wc = "watson cancel";
+        ww = "watson status";
+        wl = "watson log";
+        wld = "watson log -d";
+        wlw = "watson log -w";
+        wrp = "watson report";
+        wrpd = "watson report -d";
+        wrpw = "watson report -w";
+        wrpm = "watson report -m";
+        wa = "watson aggregate";
+        we = "watson edit";
+        wp = "watson projects";
+        wt = "watson tags";
+        wrn = "watson rename";
+        wrm = "watson remove";
 
         # uair pomodoro
         ut = "uairctl toggle";
@@ -52,6 +59,7 @@ in
         upr = "uairctl prev";
         uf = "uairctl finish";
         uj = "uairctl jump";
+        ulr = "uairctl jump long-rest";
         url = "uairctl reload";
         ufe = "uairctl fetch";
         ul = "uairctl listen";
@@ -196,7 +204,7 @@ in
       };
     };
 
-    fzf = {
+    fzf = {    # fuzzy finder
       enable = true;
       enableFishIntegration = true;
       defaultOptions = [
@@ -210,12 +218,17 @@ in
       ];
     };
 
-    bat = {
+    bat = { # cat alternative
       enable = true;
       config.theme = "Catppuccin Mocha";
     };
 
-    direnv = {
+    zoxide = { # cd alternative
+      enable = true;
+      enableFishIntegration = true;
+    };
+
+    direnv = { # for nix flakes in projects
       enable = true;
       nix-direnv.enable = true;
     };

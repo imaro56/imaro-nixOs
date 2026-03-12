@@ -26,15 +26,22 @@
     [[sessions]]
     id = "work"
     name = "Work"
-    duration = "55m"
-    command = "notify-send 'uair' 'Take a break!' && toggl stop"
+    duration = "25m"
+    command = "notify-send 'uair' 'Take a break!' && watson stop"
     autostart = false
 
     [[sessions]]
     id = "rest"
     name = "Rest"
-    duration = "10m"
-    command = "notify-send 'uair' 'Back to work!'"
+    duration = "5m"
+    command = "notify-send 'uair' 'Back to work!' && watson restart"
+    autostart = false
+
+    [[sessions]]
+    id = "long-rest"
+    name = "Long Rest"
+    duration = "15m"
+    command = "notify-send 'uair' 'Back to work!' && watson restart"
     autostart = false
   '';
 }
