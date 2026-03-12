@@ -50,8 +50,8 @@ in
           format = "{id}";
           all-outputs = false;
           persistent-workspaces = {
-            "eDP-2" = [ 1 2 ];
-            "DP-3" = [ 3 4 5 6 7 8 ];
+            "eDP-2" = [ 1 2 3];
+            "DP-3" = [ 4 5 6 7 8 ];
             "DP-4" = [ 9 10 ];
           };
         };

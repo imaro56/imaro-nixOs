@@ -74,9 +74,9 @@
         # Left monitor (eDP-2) — comms & reference
         "1, monitor:eDP-2, default:true, persistent:true"
         "2, monitor:eDP-2, persistent:true"
+        "3, monitor:eDP-2, persistent:true"
         # Center monitor (DP-3) — main work
-        "3, monitor:DP-3, default:true, persistent:true"
-        "4, monitor:DP-3, persistent:true"
+        "4, monitor:DP-3, default:true, persistent:true"
         "5, monitor:DP-3, persistent:true"
         "6, monitor:DP-3, persistent:true"
         "7, monitor:DP-3, persistent:true"

@@ -8,6 +8,9 @@
       telegram-desktop
       discord
       slack
+      
+      # University
+      teams-for-linux
 
       # Terminal tools
       ripgrep
