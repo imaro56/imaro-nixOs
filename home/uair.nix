@@ -26,7 +26,7 @@
     [[sessions]]
     id = "work"
     name = "Work"
-    duration = "50m"
+    duration = "55m"
     command = "notify-send 'uair' 'Take a break!' && toggl stop"
     autostart = false
 

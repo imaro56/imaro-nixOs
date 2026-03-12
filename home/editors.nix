@@ -24,11 +24,4 @@
     recursive = true;
   };
 
-  # LazyVim runtime dependencies
-  home.packages = with pkgs; [
-    gcc # treesitter compilation
-    gnumake
-    fd # file finder (used by telescope)
-    lazygit # git TUI (LazyVim integrates with it)
-  ];
 }
